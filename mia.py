@@ -10,11 +10,11 @@ class Mia(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.center = (x, y)
         
-        self.body = pymunk.Body(10,99999)
+        self.body = pymunk.Body(10,pymunk.inf)
         self.body.position = x,y
         self.shape = pymunk.Poly.create_box(self.body, (17,30))
         self.shape.elasticity = 0
-        self.shape.friction = .5
+        self.shape.friction = .6
         self.body.velocity_limit = 300
         
         self.imagelist_left = map(pygame.image.load, sorted(glob.glob('images/mia/mia-left-*.png')))
@@ -29,11 +29,11 @@ class Mia(pygame.sprite.Sprite):
         
     def update(self):
         self.rect.center = self.body.position
-        self.body.angle = 0
+       
         
     def moveleft(self):
         #self.rect.left -=1
-        self.body.apply_impulse((-100,0))
+        self.body.apply_impulse((-200,0))
         
         self.animation_counter -=1
         if self.animation_counter == 0:
@@ -42,7 +42,7 @@ class Mia(pygame.sprite.Sprite):
     
     def moveright(self):
         #self.rect.left +=1
-        self.body.apply_impulse((100,0))
+        self.body.apply_impulse((200,0))
         
         self.animation_counter -=1
         if self.animation_counter == 0:

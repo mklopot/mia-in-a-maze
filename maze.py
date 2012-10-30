@@ -29,8 +29,9 @@ def init():
     global space 
     space = pymunk.Space()
     space.gravity = (0.0, 900.0)
-    space.iterations = 1
-    space.idle_speed_threshold = .0001
+    space.iterations = 3
+    space.idle_speed_threshold = 20
+    space.collision_slop = .001
     
     
     global player
@@ -50,7 +51,7 @@ def init():
     
     for segment in segments:
         segment.elasticity = 0
-        segment.friction = .8
+        segment.friction = .9
         space.add(segment)
 
 def main():
@@ -60,7 +61,7 @@ def main():
         screen.fill(THECOLORS["lightblue"])
         players.update()
         
-        pygame.draw.line(screen, 0, (50,500), (500, 500), 3)
+        pygame.draw.line(screen, 0, (50,500), (500, 500), 5)
         
         players.draw(screen)
         print player.shape.get_points()
