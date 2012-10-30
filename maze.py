@@ -28,21 +28,39 @@ def init():
 
     global space 
     space = pymunk.Space()
-    space.gravity = (0.0, -900.0)
+    space.gravity = (0.0, 900.0)
     
     global player
-    player=mia.Mia()
+    player=mia.Mia(y=450)
+    space.add(player.body, player.shape)
     
     global players
     players = pygame.sprite.Group()
     player.add(players)
+    
+    left_border = pymunk.Segment(pymunk.Body(), (0,0), (0, 600), 0.0)
+    right_border = pymunk.Segment(pymunk.Body(), (800,0), (800, 600), 0.0)
+    top_border = pymunk.Segment(pymunk.Body(), (0,0), (800, 0), 0.0)
+    bottom_border = pymunk.Segment(pymunk.Body(), (0,600), (800, 600), 0.0)
+    line = pymunk.Segment(pymunk.Body(), (50.0,500.0), (500.0, 500.0), 0.0)
+    segments = [left_border, right_border, top_border, bottom_border, line]
+    
+    for segment in segments:
+        segment.elasticity = 0
+        segment.friction = .5
+        space.add(segment)
 
 def main():
     while True:
         keyinput.getinput(player)
 
         screen.fill(THECOLORS["lightblue"])
+        players.update()
+        
+        pygame.draw.line(screen, 0, (50,500), (500, 500))
+        
         players.draw(screen)
+        print player.shape.get_points()
 
         space.step(1/50.0)
 
