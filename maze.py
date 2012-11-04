@@ -7,6 +7,8 @@ from pygame.color import *
 import pymunk
 import math
 
+from pymunk.pygame_util import draw_space
+
 import keyinput
 import mia
 
@@ -65,7 +67,9 @@ def main():
         
         players.draw(screen)
         print player.shape.get_points()
-
+        
+        draw_space(screen, space)
+        
         space.step(1/50.0)
 
         pygame.display.flip()

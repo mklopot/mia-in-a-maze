@@ -15,7 +15,8 @@ def getinput(actor):
             elif event.key == K_UP:
  	            actor.jump()
             elif event.key == K_DOWN:
-                pass
+                actor.movedown()
+                
       
 
 
