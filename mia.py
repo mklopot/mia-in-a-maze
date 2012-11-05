@@ -25,8 +25,8 @@ class Mia(pygame.sprite.Sprite):
         self.feet_shape.friction = 1
         self.main_shape.friction = .3
         self.feet_shape.collision_type = 2
+        self.feet_shape.owner = self
         
-        self.can_jump = True
         self.footcontact = False
         
         self.imagelist_left = map(pygame.image.load, sorted(glob.glob('images/mia/mia-left-*.png')))
@@ -59,8 +59,10 @@ class Mia(pygame.sprite.Sprite):
         self.body.apply_impulse((200,0))
                 
     def jump(self):
-        self.body.apply_impulse((0,-500))
-        
+        if self.footcontact:
+            self.body.apply_impulse((0,-20000))
+            self.footcontact = False
+            
     def movedown(self):
         self.image = self.image_default
 

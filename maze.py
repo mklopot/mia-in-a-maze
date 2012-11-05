@@ -32,6 +32,8 @@ def init():
     
     global footcontact_handler
     def footcontact_handler(space,arbiter):
+        arbiter.shapes[0].owner.footcontact = True
+        print "footcontact set to True"    
         return True 
     
     space = pymunk.Space()
@@ -64,6 +66,7 @@ def init():
     for segment in segments:
         segment.elasticity = 0
         segment.friction = .9
+        segment.collision_type = 1
         space.add(segment)
 
 def main():
