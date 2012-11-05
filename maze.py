@@ -72,7 +72,7 @@ def init():
     top_border = pymunk.Segment(pymunk.Body(), (0,0), (800, 0), 5)
     bottom_border = pymunk.Segment(pymunk.Body(), (0,600), (800, 600), 5)
     line = pymunk.Segment(pymunk.Body(), (50.0,500.0), (500.0, 500.0), 5)
-    line1 = pymunk.Segment(pymunk.Body(), (500.0,550.0), (550.0, 550.0), 5)
+    line1 = pymunk.Segment(pymunk.Body(), (500.0,540.0), (550.0, 540.0), 5)
     segments = [left_border, right_border, top_border, bottom_border, line, line1]
     
     for segment in segments:
@@ -89,7 +89,7 @@ def main():
         characters.update()
         
         pygame.draw.line(screen, 0, (50,500), (500, 500), 5)
-        pygame.draw.line(screen, 0, (500,550), (550, 550), 5)
+        pygame.draw.line(screen, 0, (500,540), (550, 540), 5)
         
         characters.draw(screen)
         print player.feet_shape.get_points()
