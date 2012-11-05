@@ -28,17 +28,27 @@ def init():
     global clock
     clock = pygame.time.Clock()
 
-    global space 
+    global space
+    
+    global footcontact_handler
+    def footcontact_handler(space,arbiter):
+        return True 
+    
     space = pymunk.Space()
     space.gravity = (0.0, 900.0)
     space.iterations = 3
     space.idle_speed_threshold = 20
     space.collision_slop = .001
+    space.add_collision_handler(2,1, post_solve=footcontact_handler)
     
+
+        
     
     global player
     player=mia.Mia(y=450)
-    space.add(player.body, player.shape)
+    space.add(player.body)
+    for shape in player.shapes:
+        space.add(shape)
     
     global players
     players = pygame.sprite.Group()
@@ -66,7 +76,7 @@ def main():
         pygame.draw.line(screen, 0, (50,500), (500, 500), 5)
         
         players.draw(screen)
-        print player.shape.get_points()
+        print player.feet_shape.get_points()
         
         draw_space(screen, space)
         

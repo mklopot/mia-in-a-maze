@@ -14,21 +14,27 @@ class Mia(pygame.sprite.Sprite):
         
         self.body = pymunk.Body(10,pymunk.inf)
         self.body.position = x,y
-        self.shape = pymunk.Poly.create_box(self.body, (17,30))
-        self.shape.elasticity = 0
-        self.shape.friction = .6
         self.body.velocity_limit = 300
-        self.shape.collision_type = 2
+        
+        self.main_shape = pymunk.Circle(self.body, 10, offset=(0,-5))
+        self.feet_shape = pymunk.Poly(self.body, [(3,5),(-3,5),(-3,15),(3,15)])
+        
+        self.shapes = [self.main_shape, self.feet_shape]
+              
+        self.main_shape.elasticity = self.feet_shape.elasticity = 0.3
+        self.feet_shape.friction = 1
+        self.main_shape.friction = .3
+        self.feet_shape.collision_type = 2
         
         self.can_jump = True
-        
+        self.footcontact = False
         
         self.imagelist_left = map(pygame.image.load, sorted(glob.glob('images/mia/mia-left-*.png')))
         self.imagelist_right = map(pygame.image.load, sorted(glob.glob('images/mia/mia-right-*.png')))
         self.left_counter = 0
         self.right_counter = 0
         
-        self.animation_counter_max = 6
+        self.animation_counter_max = 8
         self.animation_counter = self.animation_counter_max
      
         
@@ -38,7 +44,7 @@ class Mia(pygame.sprite.Sprite):
         self.animation_counter -= 1
         if self.animation_counter == 0:
             self.animation_counter = self.animation_counter_max
-            if abs(self.body.velocity.x) < .1:
+            if abs(self.body.velocity.x) < .001:
                 self.image = self.image_default
             elif self.body.velocity.x > 0:
                 self.animate_right()
