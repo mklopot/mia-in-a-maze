@@ -2,9 +2,9 @@ import pygame
 import pymunk
 import glob
 
-class Mia(pygame.sprite.Sprite):
+class DoomImp(pygame.sprite.Sprite):
 
-    def __init__(self, image="images/mia/mia-front-0.png", x=100, y=100):
+    def __init__(self, target, image="images/imp/imp.png", x=100, y=100):
         pygame.sprite.Sprite.__init__(self)
         self.image_default = pygame.image.load(image)
         self.image = self.image_default
@@ -16,8 +16,8 @@ class Mia(pygame.sprite.Sprite):
         self.body.position = x,y
         self.body.velocity_limit = 300
         
-        self.main_shape = pymunk.Circle(self.body, 11, offset=(0,-5))
-        self.feet_shape = pymunk.Poly(self.body, [(3,5),(-3,5),(-3,15),(3,15)])
+        self.main_shape = pymunk.Circle(self.body, 16, offset=(0,-4))
+        self.feet_shape = pymunk.Poly(self.body, [(4,5),(-4,5),(-4,21),(4,21)])
         
         self.shapes = [self.main_shape, self.feet_shape]
               
@@ -29,14 +29,15 @@ class Mia(pygame.sprite.Sprite):
         
         self.footcontact = False
         
-        self.imagelist_left = map(pygame.image.load, sorted(glob.glob('images/mia/mia-left-*.png')))
-        self.imagelist_right = map(pygame.image.load, sorted(glob.glob('images/mia/mia-right-*.png')))
+        self.imagelist_left = map(pygame.image.load, sorted(glob.glob('images/imp/imp-left-*.png')))
+        self.imagelist_right = map(pygame.image.load, sorted(glob.glob('images/imp/imp-right-*.png')))
         self.left_counter = 0
         self.right_counter = 0
         
         self.animation_counter_max = 8
         self.animation_counter = self.animation_counter_max
      
+        self.target = target
         
     def update(self):
         self.rect.center = self.body.position
@@ -51,12 +52,13 @@ class Mia(pygame.sprite.Sprite):
             else:
                 self.animate_left()
         
+        self.attack(self.target)
         
     def moveleft(self):
-        self.body.apply_impulse((-200,0))
+        self.body.apply_impulse((-180,0))
     
     def moveright(self):
-        self.body.apply_impulse((200,0))
+        self.body.apply_impulse((180,0))
                 
     def jump(self):
         if self.footcontact:
@@ -77,3 +79,9 @@ class Mia(pygame.sprite.Sprite):
         self.right_counter += 1
         if self.right_counter > (len(self.imagelist_right) - 1):
             self.right_counter = 0
+    
+    def attack(self, target):
+        if target.body.position.x > self.body.position.x:
+            self.moveright()
+        else:
+            self.moveleft()

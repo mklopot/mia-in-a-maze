@@ -11,6 +11,7 @@ from pymunk.pygame_util import draw_space
 
 import keyinput
 import mia
+import doomimp
 
 def to_pygame(p):
     """Small hack to convert pymunk to pygame coordinates"""
@@ -47,21 +48,32 @@ def init():
         
     
     global player
-    player=mia.Mia(y=450)
+    player = mia.Mia(y=450)
     space.add(player.body)
     for shape in player.shapes:
         space.add(shape)
     
-    global players
-    players = pygame.sprite.Group()
-    player.add(players)
+    global npc
+    npc = doomimp.DoomImp(x=200, y=250, target=player)
+    space.add(npc.body)
+    for shape in npc.shapes:
+        space.add(shape)
+            
+            
+    global characters
+    characters = pygame.sprite.Group()
+    player.add(characters)
+    npc.add(characters)
+    
+    print characters
     
     left_border = pymunk.Segment(pymunk.Body(), (0,0), (0, 600), 5)
     right_border = pymunk.Segment(pymunk.Body(), (800,0), (800, 600), 5)
     top_border = pymunk.Segment(pymunk.Body(), (0,0), (800, 0), 5)
     bottom_border = pymunk.Segment(pymunk.Body(), (0,600), (800, 600), 5)
     line = pymunk.Segment(pymunk.Body(), (50.0,500.0), (500.0, 500.0), 5)
-    segments = [left_border, right_border, top_border, bottom_border, line]
+    line1 = pymunk.Segment(pymunk.Body(), (500.0,550.0), (550.0, 550.0), 5)
+    segments = [left_border, right_border, top_border, bottom_border, line, line1]
     
     for segment in segments:
         segment.elasticity = 0
@@ -74,11 +86,12 @@ def main():
         keyinput.getinput(player)
 
         screen.fill(THECOLORS["lightblue"])
-        players.update()
+        characters.update()
         
         pygame.draw.line(screen, 0, (50,500), (500, 500), 5)
+        pygame.draw.line(screen, 0, (500,550), (550, 550), 5)
         
-        players.draw(screen)
+        characters.draw(screen)
         print player.feet_shape.get_points()
         
         draw_space(screen, space)
