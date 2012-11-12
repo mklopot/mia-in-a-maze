@@ -32,7 +32,5 @@ def init():
     space.collision_slop = .001
     space.add_collision_handler(2,1, post_solve=footcontact_handler)
     
-
-        
     global characters
     characters = pygame.sprite.Group()
