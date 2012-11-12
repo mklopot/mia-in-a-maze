@@ -14,7 +14,7 @@ class DoomImp(pygame.sprite.Sprite):
         
         self.body = pymunk.Body(30,pymunk.inf)
         self.body.position = x,y
-        self.body.velocity_limit = 300
+        self.body.velocity_limit = 280
         
         self.main_shape = pymunk.Circle(self.body, 17, offset=(0,-4))
         self.head_shape = pymunk.Circle(self.body, 6, offset=(0,-22)) 
@@ -23,7 +23,7 @@ class DoomImp(pygame.sprite.Sprite):
         self.shapes = [self.main_shape, self.feet_shape, self.head_shape]
               
         self.main_shape.elasticity = self.feet_shape.elasticity = 0.3
-        self.feet_shape.friction = 1
+        self.feet_shape.friction = .7
         self.main_shape.friction = 0
         self.feet_shape.collision_type = 2
         self.head_shape.collision_type = 1
@@ -57,14 +57,14 @@ class DoomImp(pygame.sprite.Sprite):
         self.attack(self.target)
         
     def moveleft(self):
-        self.body.apply_impulse((-540,0))
+        self.body.apply_impulse((-400,0))
     
     def moveright(self):
-        self.body.apply_impulse((540,0))
+        self.body.apply_impulse((400,0))
                 
     def jump(self):
         if self.footcontact:
-            self.body.apply_impulse((0,-30000))
+            self.body.apply_impulse((0,-14000))
             self.footcontact = False
             
     def movedown(self):

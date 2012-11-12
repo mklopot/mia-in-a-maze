@@ -46,34 +46,32 @@ def init():
     
 
         
+    global characters
+    characters = pygame.sprite.Group()
     
     global player
-    player = mia.Mia(y=450)
+    player = mia.Mia(x=300,y=450)
     space.add(player.body)
     for shape in player.shapes:
         space.add(shape)
-    
-    global npc
-    npc = doomimp.DoomImp(x=200, y=250, target=player)
-    space.add(npc.body)
-    for shape in npc.shapes:
-        space.add(shape)
+    player.add(characters)    
+
+    global npcs
+    npcs = [doomimp.DoomImp(x=200, y=250, target=player), doomimp.DoomImp(x=700, y=150, target=player), doomimp.DoomImp(x=700,y=560,target=player)]
+    for npc in npcs:
+        space.add(npc.body)
+        for shape in npc.shapes:
+            space.add(shape)
+        npc.add(characters)
             
-            
-    global characters
-    characters = pygame.sprite.Group()
-    player.add(characters)
-    npc.add(characters)
-    
-    print characters
-    
     left_border = pymunk.Segment(pymunk.Body(), (0,0), (0, 600), 5)
     right_border = pymunk.Segment(pymunk.Body(), (800,0), (800, 600), 5)
     top_border = pymunk.Segment(pymunk.Body(), (0,0), (800, 0), 5)
     bottom_border = pymunk.Segment(pymunk.Body(), (0,600), (800, 600), 5)
     line = pymunk.Segment(pymunk.Body(), (50.0,500.0), (500.0, 500.0), 5)
     line1 = pymunk.Segment(pymunk.Body(), (500.0,540.0), (550.0, 540.0), 5)
-    segments = [left_border, right_border, top_border, bottom_border, line, line1]
+    diag = pymunk.Segment(pymunk.Body(), (100.0,450.0), (450.0, 140.0), 5)
+    segments = [left_border, right_border, top_border, bottom_border, line, line1, diag]
     
     for segment in segments:
         segment.elasticity = 0
@@ -90,11 +88,12 @@ def main():
         
         pygame.draw.line(screen, 0, (50,500), (500, 500), 5)
         pygame.draw.line(screen, 0, (500,540), (550, 540), 5)
+        pygame.draw.line(screen, 0, (100,450), (450, 140), 5)
         
         characters.draw(screen)
         print player.feet_shape.get_points()
         
-        draw_space(screen, space)
+        #draw_space(screen, space)
         
         space.step(1/50.0)
 

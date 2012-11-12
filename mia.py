@@ -22,7 +22,7 @@ class Mia(pygame.sprite.Sprite):
         self.shapes = [self.main_shape, self.feet_shape]
               
         self.main_shape.elasticity = self.feet_shape.elasticity = 0.3
-        self.feet_shape.friction = 1
+        self.feet_shape.friction = .9
         self.main_shape.friction = .3
         self.feet_shape.collision_type = 2
         self.feet_shape.owner = self
