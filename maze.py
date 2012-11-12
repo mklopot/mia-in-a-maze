@@ -9,6 +9,7 @@ import math
 
 from pymunk.pygame_util import draw_space
 
+import framework
 import keyinput
 import mia
 import doomimp
@@ -20,48 +21,24 @@ def to_pygame(p):
 
 
 def init():
-    pygame.init()
-    global screen
-    screen = pygame.display.set_mode((800, 600))
-    pygame.display.set_caption("Awesome Maze")
-    pygame.key.set_repeat(10)
-    
-    global clock
-    clock = pygame.time.Clock()
-
-    global space
-    
-    global footcontact_handler
-    def footcontact_handler(space,arbiter):
-        arbiter.shapes[0].owner.footcontact = True
-        print "footcontact set to True"    
-        return True 
-    
-    space = pymunk.Space()
-    space.gravity = (0.0, 900.0)
-    space.iterations = 3
-    space.idle_speed_threshold = 20
-    space.collision_slop = .001
-    space.add_collision_handler(2,1, post_solve=footcontact_handler)
-    
-
-        
+    framework.init()
+       
     global characters
     characters = pygame.sprite.Group()
     
     global player
     player = mia.Mia(x=300,y=450)
-    space.add(player.body)
+    framework.space.add(player.body)
     for shape in player.shapes:
-        space.add(shape)
+        framework.space.add(shape)
     player.add(characters)    
 
     global npcs
     npcs = [doomimp.DoomImp(x=200, y=250, target=player), doomimp.DoomImp(x=700, y=150, target=player), doomimp.DoomImp(x=700,y=560,target=player)]
     for npc in npcs:
-        space.add(npc.body)
+        framework.space.add(npc.body)
         for shape in npc.shapes:
-            space.add(shape)
+            framework.space.add(shape)
         npc.add(characters)
             
     left_border = pymunk.Segment(pymunk.Body(), (0,0), (0, 600), 5)
@@ -77,28 +54,28 @@ def init():
         segment.elasticity = 0
         segment.friction = .9
         segment.collision_type = 1
-        space.add(segment)
+        framework.space.add(segment)
 
 def main():
     while True:
         keyinput.getinput(player)
 
-        screen.fill(THECOLORS["lightblue"])
+        framework.screen.fill(THECOLORS["lightblue"])
         characters.update()
         
-        pygame.draw.line(screen, 0, (50,500), (500, 500), 5)
-        pygame.draw.line(screen, 0, (500,540), (550, 540), 5)
-        pygame.draw.line(screen, 0, (100,450), (450, 140), 5)
+        pygame.draw.line(framework.screen, 0, (50,500), (500, 500), 5)
+        pygame.draw.line(framework.screen, 0, (500,540), (550, 540), 5)
+        pygame.draw.line(framework.screen, 0, (100,450), (450, 140), 5)
         
-        characters.draw(screen)
+        characters.draw(framework.screen)
         print player.feet_shape.get_points()
         
         #draw_space(screen, space)
         
-        space.step(1/50.0)
+        framework.space.step(1/50.0)
 
         pygame.display.flip()
-        clock.tick(50)
+        framework.clock.tick(50)
 
 if __name__ == '__main__':
     init()
