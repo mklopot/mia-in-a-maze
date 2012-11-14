@@ -1,4 +1,5 @@
 import pygame
+from pygame.color import *
 import pymunk
 
 import framework
@@ -7,19 +8,27 @@ class Brick():
 
     def __init__(self, size, x=400, y=400):
            
-        self.body = pymunk.Body(20,20)
-        self.body.position = x,y
+        #self.body = pymunk.Body(10,200)
+        
+        points = [(-size, -size), (-size, size), (size,size), (size, -size)]
+        mass = 2.0
+        moment = pymunk.moment_for_poly(mass, points, (0,0))        
+        
+        self.body = pymunk.Body(mass, moment)
                 
-         
-        self.shape = pymunk.Poly.create_box(self.body, (size,size))
+        self.shape = pymunk.Poly(self.body, points, (0,0))
+
+        self.body.position = x,y
+        #self.shape = pymunk.Poly.create_box(self.body, (size,size))
         
         self.shapes = [self.shape]
               
-        self.shape.elasticity = 0
-        self.shape.friction = .6
+        #self.shape.elasticity = 0
+        self.shape.friction = 1.0
+        self.shape.collision_type = 1
         self.shape.owner = self
         
     def update(self):
-        pygame.draw.lines(framework.screen, 1, True, self.shape.get_points())       
+        pygame.draw.polygon(framework.screen, THECOLORS["darkgrey"], self.shape.get_points())       
 
         

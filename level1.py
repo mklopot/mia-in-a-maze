@@ -42,8 +42,14 @@ def level():
         segment.collision_type = 1
         framework.space.add(segment)
     
-    brick1 = brick.Brick(size=5)
-    framework.primitives.append(brick1)
-    framework.space.add(brick1.body)
-    framework.space.add(brick1.shape)    
+    bricks = []
+    for i in range(1,12):
+        bricks.append(brick.Brick(size=40, y=45*i))
+    for i in range(1,24):
+        bricks.append(brick.Brick(size=25, x=30*i))
+        
+    for brickinstance in bricks:    
+        framework.primitives.append(brickinstance)
+        framework.space.add(brickinstance.body)
+        framework.space.add(brickinstance.shape)    
 
