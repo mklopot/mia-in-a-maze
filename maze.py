@@ -35,6 +35,9 @@ def main():
         pygame.draw.line(framework.screen, 0, (500,540), (550, 540), 5)
         pygame.draw.line(framework.screen, 0, (100,450), (450, 140), 5)
         
+        for primitive in framework.primitives:
+            primitive.update()
+            
         framework.characters.draw(framework.screen)
         print level1.player.feet_shape.get_points()
         

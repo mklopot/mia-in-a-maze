@@ -34,3 +34,6 @@ def init():
     
     global characters
     characters = pygame.sprite.Group()
+    
+    global primitives
+    primitives = []

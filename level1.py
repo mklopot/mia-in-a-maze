@@ -10,6 +10,7 @@ import math
 import framework
 import mia
 import doomimp
+import brick
 
 def level():
     global player
@@ -40,4 +41,9 @@ def level():
         segment.friction = .9
         segment.collision_type = 1
         framework.space.add(segment)
+    
+    brick1 = brick.Brick(size=5)
+    framework.primitives.append(brick1)
+    framework.space.add(brick1.body)
+    framework.space.add(brick1.shape)    
 
