@@ -1,0 +1,14 @@
+different chipmunk layers in different colors
+random doors in mazes with keys, npcs may have keys to some doors
+pirate/ninja/zombie/robot corners of maze
+waypoints in maze: corners and midpoints of sides
+moving platforms to move vertically
+wall climbing?
+tofu + elephant + airship
+multiple playable characters working together
+random maze
+airship with invisible wind blowing against it
+Joust-like airship combat
+cannons vs airships
+feeding monsters to pacify them
+teleport between mazes
