@@ -11,7 +11,7 @@ class Brick():
         #self.body = pymunk.Body(10,200)
         
         points = [(-size, -size), (-size, size), (size,size), (size, -size)]
-        mass = 2.0
+        mass = 3.0
         moment = pymunk.moment_for_poly(mass, points, (0,0))        
         
         self.body = pymunk.Body(mass, moment)
@@ -30,5 +30,5 @@ class Brick():
         
     def update(self):
         pygame.draw.polygon(framework.screen, THECOLORS["darkgrey"], self.shape.get_points())       
-
+        pygame.draw.polygon(framework.screen, THECOLORS["black"], self.shape.get_points(), True)
         
