@@ -47,9 +47,14 @@ def level():
         bricks.append(brick.Brick(size=40, y=45*i))
     for i in range(1,24):
         bricks.append(brick.Brick(size=25, x=30*i))
-        
+    
+    
+   
     for brickinstance in bricks:    
         framework.primitives.append(brickinstance)
         framework.space.add(brickinstance.body)
         framework.space.add(brickinstance.shape)    
-
+    
+    staticbrick = brick.StaticBrick(x=78, y=275, width=150, height=10)
+    framework.primitives.append(staticbrick)
+    framework.space.add(staticbrick.shape)
