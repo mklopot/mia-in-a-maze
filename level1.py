@@ -21,7 +21,7 @@ def level():
         framework.space.add(shape)
     player.add(framework.characters)    
 
-    npcs = [doomimp.DoomImp(x=200, y=250, target=player), doomimp.DoomImp(x=700, y=150, target=player), doomimp.DoomImp(x=700,y=560,target=player)]
+    npcs = [doomimp.DoomImp(x=200, y=250, target=player), doomimp.DoomImp(x=600, y=150, target=player), doomimp.DoomImp(x=550,y=560,target=player)]
     for npc in npcs:
         framework.space.add(npc.body)
         for shape in npc.shapes:
@@ -46,8 +46,8 @@ def level():
     bricks = []
     #for i in range(1,12):
     #    bricks.append(brick.Brick(size=40, y=45*i))
-    for i in range(1,24):
-        bricks.append(brick.Brick(size=25, x=750, y=30*i))
+    for i in range(1,11):
+        bricks.append(brick.Brick(size=25, x=700, y=50*i))
     
     
    
@@ -64,5 +64,5 @@ def level():
     #    framework.primitives.append(staticbrick)
     #    framework.space.add(staticbrick.shape)
     
-    maze.make_maze(100, 10, width=10, height=12, cellwidth=60, cellheight=60, wallthickness=10)    
+    maze.make_maze(100, 80, width=9, height=8, cellwidth=60, cellheight=60, wallthickness=10)    
     

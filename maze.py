@@ -84,12 +84,14 @@ def make_maze(x, y, width, height, cellwidth, cellheight, wallthickness):
         for j in range (width):
             if 'up' in mazegrid[i][j]:
                 downbrick = brick.StaticBrick(cellwidth, wallthickness, x + i * cellwidth, y + j * cellheight + cellheight/2)
+                downbrick.shape.group = 1
                 framework.space.add(downbrick.shape)
                 framework.primitives.append(downbrick)
-            #if 'left' in mazegrid[i][j]:
-                #leftbrick = brick.StaticBrick(wallthickness, cellheight, x + i * cellwidth - cellwidth/2, y + j * cellheight)
-                #framework.space.add(leftbrick.shape)
-                #framework.primitives.append(leftbrick)
+            if 'left' in mazegrid[i][j]:
+                leftbrick = brick.StaticBrick(wallthickness, cellheight - wallthickness, x + i * cellwidth - cellwidth/2, y + j * cellheight)
+                leftbrick.shape.group = 1
+                framework.space.add(leftbrick.shape)
+                framework.primitives.append(leftbrick)
             
     
 if __name__ == "__main__":
