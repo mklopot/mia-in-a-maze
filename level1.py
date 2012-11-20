@@ -11,6 +11,7 @@ import framework
 import mia
 import doomimp
 import brick
+import maze
 
 def level():
     global player
@@ -55,6 +56,12 @@ def level():
         framework.space.add(brickinstance.body)
         framework.space.add(brickinstance.shape)    
     
-    staticbrick = brick.StaticBrick(x=78, y=275, width=150, height=10)
-    framework.primitives.append(staticbrick)
-    framework.space.add(staticbrick.shape)
+    staticbricks = []
+    staticbricks.append(brick.StaticBrick(x=78, y=275, width=150, height=10))
+    staticbricks.append(brick.StaticBrick(x=178, y=175, width=125, height=10))
+    staticbricks.append(brick.StaticBrick(x=78, y=225, width=50, height=10))
+    for staticbrick in staticbricks:
+        framework.primitives.append(staticbrick)
+        framework.space.add(staticbrick.shape)
+        
+    
