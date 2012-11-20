@@ -59,8 +59,10 @@ class Mia(pygame.sprite.Sprite):
         self.body.apply_impulse((200,0))
                 
     def jump(self):
-        if self.footcontact:
-            self.body.apply_impulse((0,-10000))
+        #if self.footcontact:
+        if True:
+            #self.body.apply_impulse((0,-10000))
+            self.body.apply_impulse((0,-1000))
             self.footcontact = False
             
     def movedown(self):

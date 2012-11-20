@@ -55,6 +55,6 @@ class Brick():
         self.shape.owner = self
         
     def update(self):
-        pygame.draw.polygon(framework.screen, THECOLORS["darkgrey"], self.shape.get_points())       
+        pygame.draw.polygon(framework.screen, THECOLORS["brown"], self.shape.get_points())       
         pygame.draw.polygon(framework.screen, THECOLORS["black"], self.shape.get_points(), True)
         

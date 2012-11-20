@@ -46,8 +46,8 @@ def level():
     bricks = []
     #for i in range(1,12):
     #    bricks.append(brick.Brick(size=40, y=45*i))
-    for i in range(1,24):
-        bricks.append(brick.Brick(size=25, x=750, y=30*i))
+    for i in range(1,4):
+        bricks.append(brick.Brick(size=25, x=350, y=30*i))
     
     
    
