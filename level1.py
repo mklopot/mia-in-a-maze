@@ -28,15 +28,15 @@ def level():
             framework.space.add(shape)
         npc.add(framework.characters)
             
-    left_border = pymunk.Segment(pymunk.Body(), (0,0), (0, 600), 5)
-    right_border = pymunk.Segment(pymunk.Body(), (800,0), (800, 600), 5)
-    top_border = pymunk.Segment(pymunk.Body(), (0,0), (800, 0), 5)
+    #left_border = pymunk.Segment(pymunk.Body(), (0,0), (0, 600), 5)
+    #right_border = pymunk.Segment(pymunk.Body(), (800,0), (800, 600), 5)
+    #top_border = pymunk.Segment(pymunk.Body(), (0,0), (800, 0), 5)
     bottom_border = pymunk.Segment(pymunk.Body(), (0,600), (800, 600), 5)
-    line = pymunk.Segment(pymunk.Body(), (50.0,500.0), (500.0, 500.0), 5)
-    line1 = pymunk.Segment(pymunk.Body(), (500.0,540.0), (550.0, 540.0), 5)
-    diag = pymunk.Segment(pymunk.Body(), (100.0,450.0), (450.0, 140.0), 5)
-    segments = [left_border, right_border, top_border, bottom_border, line, line1, diag]
-    
+    #line = pymunk.Segment(pymunk.Body(), (50.0,500.0), (500.0, 500.0), 5)
+    #line1 = pymunk.Segment(pymunk.Body(), (500.0,540.0), (550.0, 540.0), 5)
+    #diag = pymunk.Segment(pymunk.Body(), (100.0,450.0), (450.0, 140.0), 5)
+    #segments = [left_border, right_border, top_border, bottom_border, line, line1, diag]
+    segments = [bottom_border]
     for segment in segments:
         segment.elasticity = 0
         segment.friction = .9
@@ -44,10 +44,10 @@ def level():
         framework.space.add(segment)
     
     bricks = []
-    for i in range(1,12):
-        bricks.append(brick.Brick(size=40, y=45*i))
+    #for i in range(1,12):
+    #    bricks.append(brick.Brick(size=40, y=45*i))
     for i in range(1,24):
-        bricks.append(brick.Brick(size=25, x=30*i))
+        bricks.append(brick.Brick(size=25, x=750, y=30*i))
     
     
    
@@ -56,12 +56,13 @@ def level():
         framework.space.add(brickinstance.body)
         framework.space.add(brickinstance.shape)    
     
-    staticbricks = []
-    staticbricks.append(brick.StaticBrick(x=78, y=275, width=150, height=10))
-    staticbricks.append(brick.StaticBrick(x=178, y=175, width=125, height=10))
-    staticbricks.append(brick.StaticBrick(x=78, y=225, width=50, height=10))
-    for staticbrick in staticbricks:
-        framework.primitives.append(staticbrick)
-        framework.space.add(staticbrick.shape)
-        
+    #staticbricks = []
+    #staticbricks.append(brick.StaticBrick(x=78, y=275, width=150, height=10))
+    #staticbricks.append(brick.StaticBrick(x=178, y=175, width=125, height=10))
+    #staticbricks.append(brick.StaticBrick(x=78, y=225, width=50, height=10))
+    #for staticbrick in staticbricks:
+    #    framework.primitives.append(staticbrick)
+    #    framework.space.add(staticbrick.shape)
+    
+    maze.make_maze(100, 10, width=10, height=12, cellwidth=60, cellheight=60, wallthickness=10)    
     

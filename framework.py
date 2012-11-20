@@ -22,7 +22,7 @@ def init():
     global footcontact_handler
     def footcontact_handler(space,arbiter):
         arbiter.shapes[0].owner.footcontact = True
-        print "footcontact set to True"    
+        #print "footcontact set to True"    
         return True 
     
     space = pymunk.Space()

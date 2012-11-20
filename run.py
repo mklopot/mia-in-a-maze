@@ -31,15 +31,11 @@ def main():
         framework.screen.fill(THECOLORS["lightblue"])
         framework.characters.update()
         
-        pygame.draw.line(framework.screen, 0, (50,500), (500, 500), 5)
-        pygame.draw.line(framework.screen, 0, (500,540), (550, 540), 5)
-        pygame.draw.line(framework.screen, 0, (100,450), (450, 140), 5)
-        
         for primitive in framework.primitives:
             primitive.update()
             
         framework.characters.draw(framework.screen)
-        print level1.player.feet_shape.get_points()
+        #print level1.player.feet_shape.get_points()
         
         #draw_space(screen, space)
         

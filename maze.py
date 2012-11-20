@@ -4,6 +4,9 @@ import random
 import sys
 #sys.setrecursionlimit(9999999)
 
+import framework
+import brick
+
 def make_grid(width, height, start=(0,0)):
     """Generates a random maze, returns an array of cells, each cell contains some walls"""
     
@@ -72,6 +75,22 @@ def process_cell(cell):
         else:
             print "Destination out of bounds: ", nextcell
 
+ 
+def make_maze(x, y, width, height, cellwidth, cellheight, wallthickness):
+
+    mazegrid = make_grid(width, height)
+    mazebricks = []
+    for i in range(height):
+        for j in range (width):
+            if 'up' in mazegrid[i][j]:
+                downbrick = brick.StaticBrick(cellwidth, wallthickness, x + i * cellwidth, y + j * cellheight + cellheight/2)
+                framework.space.add(downbrick.shape)
+                framework.primitives.append(downbrick)
+            #if 'left' in mazegrid[i][j]:
+                #leftbrick = brick.StaticBrick(wallthickness, cellheight, x + i * cellwidth - cellwidth/2, y + j * cellheight)
+                #framework.space.add(leftbrick.shape)
+                #framework.primitives.append(leftbrick)
+            
     
 if __name__ == "__main__":
     make_grid(20,30)
