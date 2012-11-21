@@ -37,7 +37,7 @@ class Brick():
         #self.body = pymunk.Body(10,200)
         
         points = [(-size, -size), (-size, size), (size,size), (size, -size)]
-        mass = 3.0
+        mass = 1.0
         moment = pymunk.moment_for_poly(mass, points, (0,0))        
         
         self.body = pymunk.Body(mass, moment)
@@ -49,7 +49,7 @@ class Brick():
         
         self.shapes = [self.shape]
               
-        #self.shape.elasticity = 0
+        self.shape.elasticity = 1.5
         self.shape.friction = 1.0
         self.shape.collision_type = 1
         self.shape.owner = self

@@ -46,23 +46,27 @@ def level():
     bricks = []
     #for i in range(1,12):
     #    bricks.append(brick.Brick(size=40, y=45*i))
-    for i in range(1,11):
-        bricks.append(brick.Brick(size=25, x=700, y=50*i))
+    for i in range(1,20):
+        bricks.append(brick.Brick(size=10, y=150, x=100+21*i))
+    for i in range(1,20):
+        bricks.append(brick.Brick(size=10, y=250, x=100+21*i))
+    for i in range(1,20):
+        bricks.append(brick.Brick(size=10, y=350, x=100+21*i))
     
-    
-   
     for brickinstance in bricks:    
         framework.primitives.append(brickinstance)
         framework.space.add(brickinstance.body)
         framework.space.add(brickinstance.shape)    
     
-    #staticbricks = []
-    #staticbricks.append(brick.StaticBrick(x=78, y=275, width=150, height=10))
+    staticbricks = []
+    staticbricks.append(brick.StaticBrick(x=425, y=50, width=20, height=10))
     #staticbricks.append(brick.StaticBrick(x=178, y=175, width=125, height=10))
     #staticbricks.append(brick.StaticBrick(x=78, y=225, width=50, height=10))
-    #for staticbrick in staticbricks:
-    #    framework.primitives.append(staticbrick)
-    #    framework.space.add(staticbrick.shape)
+    for staticbrick in staticbricks:
+        framework.primitives.append(staticbrick)
+        framework.space.add(staticbrick.shape)
     
-    maze.make_maze(100, 80, width=9, height=8, cellwidth=60, cellheight=60, wallthickness=10)    
+    maze.make_maze(100, 80, width=8, height=4, cellwidth=70, cellheight=65, wallthickness=10)    
+    maze.make_maze(540, 80, width=8, height=4, cellwidth=70, cellheight=65, wallthickness=10)
+    
     
