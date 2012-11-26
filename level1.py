@@ -59,14 +59,22 @@ def level():
         framework.space.add(brickinstance.shape)    
     
     staticbricks = []
-    staticbricks.append(brick.StaticBrick(x=425, y=50, width=20, height=10))
-    #staticbricks.append(brick.StaticBrick(x=178, y=175, width=125, height=10))
+    staticbricks.append(brick.StaticBrick(x=425, y=50, width=50, height=10))
+    staticbricks.append(brick.StaticBrick(x=350, y=270, width=10, height=420))
     #staticbricks.append(brick.StaticBrick(x=78, y=225, width=50, height=10))
     for staticbrick in staticbricks:
         framework.primitives.append(staticbrick)
         framework.space.add(staticbrick.shape)
     
     maze.make_maze(100, 80, width=8, height=4, cellwidth=70, cellheight=65, wallthickness=10)    
+
     maze.make_maze(540, 80, width=8, height=4, cellwidth=70, cellheight=65, wallthickness=10)
     
     
+    prize = (brick.Star(inner_radius=5, outer_radius=20, num_pts=6, x=540, y=450))
+    framework.primitives.append(prize)
+    framework.space.add(prize.body)
+    framework.space.add(prize.shape)
+
+    joint = pymunk.SlideJoint(player.body, prize.body, (0,0), (0,0), min=20, max=27)
+    framework.space.add(joint)
