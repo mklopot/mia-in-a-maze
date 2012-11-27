@@ -1,6 +1,9 @@
 import pygame
 import pymunk
 import glob
+import math
+
+import framework
 
 class Mia(pygame.sprite.Sprite):
 
@@ -36,7 +39,8 @@ class Mia(pygame.sprite.Sprite):
         
         self.animation_counter_max = 8
         self.animation_counter = self.animation_counter_max
-     
+
+        self.grab_joint = None   
         
     def update(self):
         self.rect.center = self.body.position
@@ -66,6 +70,15 @@ class Mia(pygame.sprite.Sprite):
             
     def movedown(self):
         self.image = self.image_default
+
+    def grab(self):
+        if framework.prize and not self.grab_joint:
+            if math.sqrt((self.body.position.x - framework.prize.body.position.x) ** 2 + (self.body.position.y - framework.prize.body.position.y) ** 2) < 50:
+                 self.grab_joint = pymunk.SlideJoint(self.body, framework.prize.body, (0,0), (0,0), min=20, max=27)
+                 framework.space.add(self.grab_joint)
+        else:
+            framework.space.remove(self.grab_joint)
+            self.grab_joint = None
 
     def animate_left(self):
         self.image = self.imagelist_left[self.left_counter]

@@ -37,3 +37,5 @@ def init():
     
     global primitives
     primitives = []
+    
+    global prize

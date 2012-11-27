@@ -13,9 +13,11 @@ def getinput(actor):
             elif event.key == K_RIGHT:
                 actor.moveright()
             elif event.key == K_UP:
- 	            actor.jump()
+ 	        actor.jump()
             elif event.key == K_DOWN:
                 actor.movedown()
+            elif event.key == K_SPACE:
+                actor.grab()
                 
       
 

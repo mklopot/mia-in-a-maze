@@ -71,10 +71,10 @@ def level():
     maze.make_maze(540, 80, width=8, height=4, cellwidth=70, cellheight=65, wallthickness=10)
     
     
-    prize = (brick.Star(inner_radius=5, outer_radius=20, num_pts=6, x=540, y=450))
-    framework.primitives.append(prize)
-    framework.space.add(prize.body)
-    framework.space.add(prize.shape)
+    framework.prize = (brick.Star(inner_radius=5, outer_radius=20, num_pts=6, x=540, y=450))
+    framework.primitives.append(framework.prize)
+    framework.space.add(framework.prize.body)
+    framework.space.add(framework.prize.shape)
 
-    joint = pymunk.SlideJoint(player.body, prize.body, (0,0), (0,0), min=20, max=27)
-    framework.space.add(joint)
+#    joint = pymunk.SlideJoint(player.body, prize.body, (0,0), (0,0), min=20, max=27)
+#    framework.space.add(joint)
