@@ -77,7 +77,7 @@ class Star():
 #            pty = inner_radius * math.sin(angle)
 #            points.append((ptx, pty))
         
-        mass = 0.5
+        mass = 1.7
         moment = pymunk.moment_for_poly(mass, points, (0,0))
 
         self.body = pymunk.Body(mass, moment)
@@ -88,11 +88,13 @@ class Star():
 
         self.shapes = [self.shape]
 
-        self.shape.friction = 1.0
+        self.shape.friction = 0.2
         self.shape.collision_type = 0
         self.shape.owner = self
 
     def update(self):
         pygame.draw.polygon(framework.screen, THECOLORS["yellow"], self.shape.get_points())
         pygame.draw.polygon(framework.screen, THECOLORS["black"], self.shape.get_points(), True)
+
+        self.body.apply_impulse((0,-200))
 

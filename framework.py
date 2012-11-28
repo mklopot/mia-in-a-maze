@@ -26,6 +26,7 @@ def init():
         return True 
     
     space = pymunk.Space()
+    space.collision_bias = pow(1.0 - 0.3, 60.0)
     space.gravity = (0.0, 900.0)
     space.iterations = 5
     #space.idle_speed_threshold = 20

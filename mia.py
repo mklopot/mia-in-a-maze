@@ -20,6 +20,7 @@ class Mia(pygame.sprite.Sprite):
         self.body.velocity_limit = 300
         
         self.main_shape = pymunk.Circle(self.body, 11, offset=(0,-5))
+        self.main_shape.layers = self.main_shape.layers ^ 0b1000
         self.feet_shape = pymunk.Poly(self.body, [(3,5),(-3,5),(-3,15),(3,15)])
         
         self.shapes = [self.main_shape, self.feet_shape]
@@ -74,7 +75,7 @@ class Mia(pygame.sprite.Sprite):
     def grab(self):
         if framework.prize and not self.grab_joint:
             if math.sqrt((self.body.position.x - framework.prize.body.position.x) ** 2 + (self.body.position.y - framework.prize.body.position.y) ** 2) < 50:
-                 self.grab_joint = pymunk.SlideJoint(self.body, framework.prize.body, (0,0), (0,0), min=20, max=27)
+                 self.grab_joint = pymunk.SlideJoint(self.body, framework.prize.body, (0,0), (0,0), min=5, max=16)
                  framework.space.add(self.grab_joint)
         else:
             framework.space.remove(self.grab_joint)
