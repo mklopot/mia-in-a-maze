@@ -8,7 +8,12 @@ tofu + elephant + airship
 multiple playable characters working together
 random maze
 airship with invisible wind blowing against it
+airship with cannon
 Joust-like airship combat
 cannons vs airships
 feeding monsters to pacify them
 teleport between mazes
+lava floor
+round baloons
+TNT boxes, round bombs
+different characters with different abilities: sniper, explosives, mechanic, etc
