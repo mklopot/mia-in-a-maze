@@ -89,11 +89,13 @@ def make_maze(x, y, width, height, cellwidth, cellheight, wallthickness):
                 framework.primitives.append(downbrick)
             elif j % 2 == 1:
                 downbrick = brick.StaticBrick(wallthickness*2, wallthickness, x + i * cellwidth - cellwidth/2 + wallthickness, y + j * cellheight + cellheight/2)
+#                downbrick = brick.StaticBrick(20, wallthickness, x + i * cellwidth - cellwidth/2 + wallthickness, y + j * cellheight + cellheight/2)
                 downbrick.shape.group = 1
                 framework.space.add(downbrick.shape)
                 framework.primitives.append(downbrick)
             else:
                 downbrick = brick.StaticBrick(wallthickness*2, wallthickness, x + i * cellwidth + cellwidth/2 - wallthickness, y + j * cellheight + cellheight/2)
+#                downbrick = brick.StaticBrick(20, wallthickness, x + i * cellwidth + cellwidth/2 - wallthickness, y + j * cellheight + cellheight/2)
                 downbrick.shape.group = 1
                 framework.space.add(downbrick.shape)
                 framework.primitives.append(downbrick)

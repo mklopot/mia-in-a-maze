@@ -34,7 +34,7 @@ def init():
     global scrolling
     scrolling = pymunk.Vec2d(0,0)
     global scrolling_margin
-    scrolling_margin = 100
+    scrolling_margin = 200
     
     global characters
     characters = pygame.sprite.Group()

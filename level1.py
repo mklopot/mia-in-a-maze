@@ -43,20 +43,20 @@ def level():
         segment.collision_type = 1
         framework.space.add(segment)
     
-    bricks = []
-    #for i in range(1,12):
-    #    bricks.append(brick.Brick(size=40, y=45*i))
-    for i in range(1,20):
-        bricks.append(brick.Brick(size=10, y=150, x=100+21*i))
-    for i in range(1,20):
-        bricks.append(brick.Brick(size=10, y=250, x=100+21*i))
-    for i in range(1,20):
-        bricks.append(brick.Brick(size=10, y=350, x=100+21*i))
-    
-    for brickinstance in bricks:    
-        framework.primitives.append(brickinstance)
-        framework.space.add(brickinstance.body)
-        framework.space.add(brickinstance.shape)    
+#    bricks = []
+#    #for i in range(1,12):
+#    #    bricks.append(brick.Brick(size=40, y=45*i))
+#    for i in range(1,20):
+#        bricks.append(brick.Brick(size=10, y=150, x=100+21*i))
+#    for i in range(1,20):
+#        bricks.append(brick.Brick(size=10, y=250, x=100+21*i))
+#    for i in range(1,20):
+#        bricks.append(brick.Brick(size=10, y=350, x=100+21*i))
+#    
+#    for brickinstance in bricks:    
+#        framework.primitives.append(brickinstance)
+#        framework.space.add(brickinstance.body)
+#        framework.space.add(brickinstance.shape)    
     
     staticbricks = []
     staticbricks.append(brick.StaticBrick(x=425, y=50, width=50, height=10))
@@ -69,6 +69,8 @@ def level():
     maze.make_maze(100, 80, width=8, height=4, cellwidth=70, cellheight=65, wallthickness=10)    
 
     maze.make_maze(540, 80, width=8, height=4, cellwidth=70, cellheight=65, wallthickness=10)
+
+    maze.make_maze(840, 80, width=40, height=10, cellwidth=90, cellheight=65, wallthickness=20)
     
     
     framework.prize = (brick.Polygon(radius=15, num_pts=6, x=300, y=500))
