@@ -43,20 +43,20 @@ def level():
         segment.collision_type = 1
         framework.space.add(segment)
     
-#    bricks = []
-#    #for i in range(1,12):
-#    #    bricks.append(brick.Brick(size=40, y=45*i))
-#    for i in range(1,20):
-#        bricks.append(brick.Brick(size=10, y=150, x=100+21*i))
-#    for i in range(1,20):
-#        bricks.append(brick.Brick(size=10, y=250, x=100+21*i))
-#    for i in range(1,20):
-#        bricks.append(brick.Brick(size=10, y=350, x=100+21*i))
-#    
-#    for brickinstance in bricks:    
-#        framework.primitives.append(brickinstance)
-#        framework.space.add(brickinstance.body)
-#        framework.space.add(brickinstance.shape)    
+    bricks = []
+    #for i in range(1,12):
+    #    bricks.append(brick.Brick(size=40, y=45*i))
+    for i in range(1,20):
+        bricks.append(brick.Brick(size=10, y=150, x=100+21*i))
+    for i in range(1,20):
+        bricks.append(brick.Brick(size=10, y=250, x=100+21*i))
+    for i in range(1,20):
+        bricks.append(brick.Brick(size=10, y=350, x=100+21*i))
+    
+    for brickinstance in bricks:    
+        framework.primitives.append(brickinstance)
+        framework.space.add(brickinstance.body)
+        framework.space.add(brickinstance.shape)    
     
     staticbricks = []
     staticbricks.append(brick.StaticBrick(x=425, y=50, width=50, height=10))

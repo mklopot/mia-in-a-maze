@@ -22,6 +22,9 @@ def init():
     
     global clock
     clock = pygame.time.Clock()
+
+    global font
+    font = pygame.font.SysFont("Arial", 16)
     
     global space
     space = pymunk.Space()
