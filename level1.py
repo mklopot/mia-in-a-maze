@@ -71,8 +71,7 @@ def level():
     maze.make_maze(540, 80, width=8, height=4, cellwidth=70, cellheight=65, wallthickness=10)
     
     
-#    framework.prize = (brick.Star(inner_radius=5, outer_radius=15, num_pts=6, x=540, y=450))
-    framework.prize = (brick.Star(inner_radius=5, outer_radius=15, num_pts=6, x=300, y=500))
+    framework.prize = (brick.Polygon(radius=15, num_pts=6, x=300, y=500))
     framework.prize.shape.layers = 0b1000
     framework.primitives.append(framework.prize)
     framework.space.add(framework.prize.body)

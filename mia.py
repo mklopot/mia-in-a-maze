@@ -44,7 +44,8 @@ class Mia(pygame.sprite.Sprite):
         self.grab_joint = None   
         
     def update(self):
-        self.rect.center = self.body.position
+#        self.rect.center = (self.body.position.x - framework.scrolling.x, self.body.position.y - framework.scrolling.y)
+        self.rect.center = self.body.position - framework.scrolling
         
         self.animation_counter -= 1
         if self.animation_counter == 0:
