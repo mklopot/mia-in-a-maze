@@ -4,6 +4,7 @@ import pymunk
 import math
 
 import framework
+import level1
 
 
 class StaticBrick():
@@ -29,9 +30,10 @@ class StaticBrick():
         self.shape.owner = self
         
     def update(self):
-        scrolled_points = [point - framework.scrolling for point in self.shape.get_points()]
-        pygame.draw.polygon(framework.screen, THECOLORS["darkgrey"], scrolled_points)       
-        pygame.draw.polygon(framework.screen, THECOLORS["black"], scrolled_points, True)
+        if self.body.position.get_distance(level1.player.body.position) < 700:
+          scrolled_points = [point - framework.scrolling for point in self.shape.get_points()]
+          pygame.draw.polygon(framework.screen, THECOLORS["darkgrey"], scrolled_points)       
+          pygame.draw.polygon(framework.screen, THECOLORS["black"], scrolled_points, True)
 
 
 class Brick():
@@ -59,11 +61,10 @@ class Brick():
         self.shape.owner = self
         
     def update(self):
-#        pygame.draw.polygon(framework.screen, THECOLORS["brown"], self.shape.get_points())       
-#        pygame.draw.polygon(framework.screen, THECOLORS["black"], self.shape.get_points(), True)
-        scrolled_points = [point - framework.scrolling for point in self.shape.get_points()]
-        pygame.draw.polygon(framework.screen, THECOLORS["brown"], scrolled_points)
-        pygame.draw.polygon(framework.screen, THECOLORS["black"], scrolled_points, True)
+        if self.body.position.get_distance(level1.player.body.position) < 700:
+          scrolled_points = [point - framework.scrolling for point in self.shape.get_points()]
+          pygame.draw.polygon(framework.screen, THECOLORS["brown"], scrolled_points)
+          pygame.draw.polygon(framework.screen, THECOLORS["black"], scrolled_points, True)
 
 
         
@@ -95,11 +96,10 @@ class Polygon():
         self.shape.owner = self
 
     def update(self):
-#        pygame.draw.polygon(framework.screen, THECOLORS["yellow"], self.shape.get_points())
-#        pygame.draw.polygon(framework.screen, THECOLORS["black"], self.shape.get_points(), True)
-        scrolled_points = [point - framework.scrolling for point in self.shape.get_points()]
-        pygame.draw.polygon(framework.screen, THECOLORS["yellow"], scrolled_points)
-        pygame.draw.polygon(framework.screen, THECOLORS["black"], scrolled_points, True)
+        if self.body.position.get_distance(level1.player.body.position) < 700:
+          scrolled_points = [point - framework.scrolling for point in self.shape.get_points()]
+          pygame.draw.polygon(framework.screen, THECOLORS["yellow"], scrolled_points)
+          pygame.draw.polygon(framework.screen, THECOLORS["black"], scrolled_points, True)
 
 
 
