@@ -7,8 +7,6 @@ from pygame.color import *
 import pymunk
 import math
 
-from pymunk.pygame_util import draw_space
-
 import framework
 import keyinput
 import level1
@@ -27,6 +25,16 @@ def init():
 def main():
     while True:
         keyinput.getinput(level1.player)
+        
+        if level1.player.rect.center[0] < framework.scrolling_margin:
+            framework.scrolling.x -= framework.scrolling_margin - level1.player.rect.center[0]      
+        if level1.player.rect.center[1] < framework.scrolling_margin:
+            framework.scrolling.y -= framework.scrolling_margin - level1.player.rect.center[1]      
+        if level1.player.rect.center[0] > framework.viewport_width - framework.scrolling_margin:
+            framework.scrolling.x += level1.player.rect.center[0] - framework.viewport_width + framework.scrolling_margin 
+        if level1.player.rect.center[1] > framework.viewport_height - framework.scrolling_margin:
+            framework.scrolling.y += level1.player.rect.center[1] - framework.viewport_height + framework.scrolling_margin
+
 
         framework.screen.fill(THECOLORS["lightblue"])
         framework.characters.update()
@@ -35,9 +43,6 @@ def main():
             primitive.update()
             
         framework.characters.draw(framework.screen)
-        #print level1.player.feet_shape.get_points()
-        
-        #draw_space(screen, space)
         
         framework.space.step(1/50.0)
 

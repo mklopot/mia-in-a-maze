@@ -8,6 +8,12 @@ import pymunk
 import math
 
 def init():
+    global viewport_width
+    viewport_width = 800
+    global viewport_height
+    viewport_height = 600
+
+
     pygame.init()
     global screen
     screen = pygame.display.set_mode((800, 600))
@@ -27,6 +33,8 @@ def init():
 
     global scrolling
     scrolling = pymunk.Vec2d(0,0)
+    global scrolling_margin
+    scrolling_margin = 100
     
     global characters
     characters = pygame.sprite.Group()
