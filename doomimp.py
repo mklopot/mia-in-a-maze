@@ -2,6 +2,8 @@ import pygame
 import pymunk
 import glob
 
+import framework
+
 class DoomImp(pygame.sprite.Sprite):
 
     def __init__(self, target, image="images/imp/imp.png", x=100, y=100):
@@ -42,7 +44,8 @@ class DoomImp(pygame.sprite.Sprite):
         self.target = target
         
     def update(self):
-        self.rect.center = self.body.position
+#        self.rect.center = self.body.position
+        self.rect.center = self.body.position - framework.scrolling
         
         self.animation_counter -= 1
         if self.animation_counter == 0:

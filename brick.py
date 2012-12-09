@@ -29,8 +29,9 @@ class StaticBrick():
         self.shape.owner = self
         
     def update(self):
-        pygame.draw.polygon(framework.screen, THECOLORS["darkgrey"], self.shape.get_points())       
-        pygame.draw.polygon(framework.screen, THECOLORS["black"], self.shape.get_points(), True)
+        scrolled_points = [point - framework.scrolling for point in self.shape.get_points()]
+        pygame.draw.polygon(framework.screen, THECOLORS["darkgrey"], scrolled_points)       
+        pygame.draw.polygon(framework.screen, THECOLORS["black"], scrolled_points, True)
 
 
 class Brick():
@@ -58,24 +59,25 @@ class Brick():
         self.shape.owner = self
         
     def update(self):
-        pygame.draw.polygon(framework.screen, THECOLORS["brown"], self.shape.get_points())       
-        pygame.draw.polygon(framework.screen, THECOLORS["black"], self.shape.get_points(), True)
+#        pygame.draw.polygon(framework.screen, THECOLORS["brown"], self.shape.get_points())       
+#        pygame.draw.polygon(framework.screen, THECOLORS["black"], self.shape.get_points(), True)
+        scrolled_points = [point - framework.scrolling for point in self.shape.get_points()]
+        pygame.draw.polygon(framework.screen, THECOLORS["brown"], scrolled_points)
+        pygame.draw.polygon(framework.screen, THECOLORS["black"], scrolled_points, True)
+
+
         
 
-class Star():
+class Polygon():
     
-    def __init__(self, outer_radius, inner_radius, num_pts, x=300, y=400):
+    def __init__(self, radius, num_pts, x=300, y=400):
         points=[]
         for i in range(0, num_pts):
             angle = (i * 2 * math.pi / num_pts)
-            ptx = outer_radius * math.cos(angle)
-            pty = outer_radius * math.sin(angle)
+            ptx = radius * math.cos(angle)
+            pty = radius * math.sin(angle)
             points.append((ptx, pty))
 
-#            angle = (i * 2 * math.pi / num_pts) + math.pi / num_pts
-#            ptx = inner_radius * math.cos(angle)
-#            pty = inner_radius * math.sin(angle)
-#            points.append((ptx, pty))
         
         mass = 1.7
         moment = pymunk.moment_for_poly(mass, points, (0,0))
@@ -93,8 +95,13 @@ class Star():
         self.shape.owner = self
 
     def update(self):
-        pygame.draw.polygon(framework.screen, THECOLORS["yellow"], self.shape.get_points())
-        pygame.draw.polygon(framework.screen, THECOLORS["black"], self.shape.get_points(), True)
+#        pygame.draw.polygon(framework.screen, THECOLORS["yellow"], self.shape.get_points())
+#        pygame.draw.polygon(framework.screen, THECOLORS["black"], self.shape.get_points(), True)
+        scrolled_points = [point - framework.scrolling for point in self.shape.get_points()]
+        pygame.draw.polygon(framework.screen, THECOLORS["yellow"], scrolled_points)
+        pygame.draw.polygon(framework.screen, THECOLORS["black"], scrolled_points, True)
+
+
 
         self.body.apply_impulse((0,-200))
 
