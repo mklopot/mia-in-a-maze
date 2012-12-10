@@ -8,7 +8,7 @@ class DoomImp(pygame.sprite.Sprite):
 
     def __init__(self, target, image="images/imp/imp.png", x=100, y=100):
         pygame.sprite.Sprite.__init__(self)
-        self.image_default = pygame.image.load(image)
+        self.image_default = pygame.image.load(image).convert_alpha()
         self.image = self.image_default
         
         self.rect = self.image.get_rect()

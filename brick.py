@@ -6,6 +6,8 @@ import math
 import framework
 import level1
 
+global visibility
+visibility = 300
 
 class StaticBrick():
 
@@ -30,7 +32,8 @@ class StaticBrick():
         self.shape.owner = self
         
     def update(self):
-        if self.body.position.get_distance(level1.player.body.position) < 700:
+        global visibility
+        if self.body.position.get_distance(level1.player.body.position) < visibility:
           scrolled_points = [point - framework.scrolling for point in self.shape.get_points()]
           pygame.draw.polygon(framework.screen, THECOLORS["darkgrey"], scrolled_points)       
           pygame.draw.polygon(framework.screen, THECOLORS["black"], scrolled_points, True)
@@ -61,7 +64,8 @@ class Brick():
         self.shape.owner = self
         
     def update(self):
-        if self.body.position.get_distance(level1.player.body.position) < 700:
+        global visibility
+        if self.body.position.get_distance(level1.player.body.position) < visibility:
           scrolled_points = [point - framework.scrolling for point in self.shape.get_points()]
           pygame.draw.polygon(framework.screen, THECOLORS["brown"], scrolled_points)
           pygame.draw.polygon(framework.screen, THECOLORS["black"], scrolled_points, True)
@@ -96,7 +100,8 @@ class Polygon():
         self.shape.owner = self
 
     def update(self):
-        if self.body.position.get_distance(level1.player.body.position) < 700:
+        global visibility
+        if self.body.position.get_distance(level1.player.body.position) < visibility:
           scrolled_points = [point - framework.scrolling for point in self.shape.get_points()]
           pygame.draw.polygon(framework.screen, THECOLORS["yellow"], scrolled_points)
           pygame.draw.polygon(framework.screen, THECOLORS["black"], scrolled_points, True)
