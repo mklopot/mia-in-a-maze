@@ -6,6 +6,7 @@ from pygame.locals import *
 from pygame.color import *
 import pymunk
 import math
+import multiprocessing
 
 import framework
 import keyinput
@@ -22,7 +23,24 @@ def init():
     framework.init()
     level1.level()   
 
+
+def render(lock):
+    while True:
+        framework.space.step(1/50.0)
+        framework.screen.blit(framework.font.render("fps: " + str(framework.clock.get_fps()), 1, THECOLORS["magenta"]), (0,0))
+        framework.screen.blit(framework.font.render("shapes: " + str(len(framework.space.shapes)), 1, THECOLORS["magenta"]), (0,20))
+        pygame.display.flip()
+        framework.clock.tick(50)
+
+        lock.release()
+
+
 def main():
+
+    renderlock = multiprocessing.Lock()
+    renderer = multiprocessing.Process(target=render, args=(renderlock,)) 
+    renderer.start()
+
     while True:
         keyinput.getinput(level1.player)
         
@@ -44,12 +62,8 @@ def main():
             
         framework.characters.draw(framework.screen)
         
-        framework.space.step(1/50.0)
-        framework.screen.blit(framework.font.render("fps: " + str(framework.clock.get_fps()), 1, THECOLORS["magenta"]), (0,0))
-        framework.screen.blit(framework.font.render("shapes: " + str(len(framework.space.shapes)), 1, THECOLORS["magenta"]), (0,20))
+        renderlock.acquire()
 
-        pygame.display.flip()
-        framework.clock.tick(50)
 
 if __name__ == '__main__':
     init()
