@@ -7,7 +7,7 @@ import framework
 import level1
 
 global visibility
-visibility = 300
+visibility = 650
 
 class StaticBrick():
 
