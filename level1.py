@@ -28,21 +28,6 @@ def level():
             framework.space.add(shape)
         npc.add(framework.characters)
             
-    #left_border = pymunk.Segment(pymunk.Body(), (0,0), (0, 600), 5)
-    #right_border = pymunk.Segment(pymunk.Body(), (800,0), (800, 600), 5)
-    #top_border = pymunk.Segment(pymunk.Body(), (0,0), (800, 0), 5)
-    bottom_border = pymunk.Segment(pymunk.Body(), (0,600), (800, 600), 5)
-    #line = pymunk.Segment(pymunk.Body(), (50.0,500.0), (500.0, 500.0), 5)
-    #line1 = pymunk.Segment(pymunk.Body(), (500.0,540.0), (550.0, 540.0), 5)
-    #diag = pymunk.Segment(pymunk.Body(), (100.0,450.0), (450.0, 140.0), 5)
-    #segments = [left_border, right_border, top_border, bottom_border, line, line1, diag]
-    segments = [bottom_border]
-    for segment in segments:
-        segment.elasticity = 0
-        segment.friction = .9
-        segment.collision_type = 1
-        framework.space.add(segment)
-    
     bricks = []
     #for i in range(1,12):
     #    bricks.append(brick.Brick(size=40, y=45*i))
@@ -61,7 +46,7 @@ def level():
     staticbricks = []
     staticbricks.append(brick.StaticBrick(x=425, y=50, width=50, height=10))
     staticbricks.append(brick.StaticBrick(x=350, y=270, width=10, height=420))
-    #staticbricks.append(brick.StaticBrick(x=78, y=225, width=50, height=10))
+    staticbricks.append(brick.StaticBrick(x=370, y=620, width=800, height=10))
     for staticbrick in staticbricks:
         framework.primitives.append(staticbrick)
         framework.space.add(staticbrick.shape)

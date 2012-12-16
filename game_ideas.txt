@@ -17,3 +17,5 @@ lava floor
 round baloons
 TNT boxes, round bombs
 different characters with different abilities: sniper, explosives, mechanic, etc
+infected bad bouncy tofu
+changing mazes with self-moving pieces
