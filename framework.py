@@ -32,7 +32,7 @@ def init():
     space.gravity = (0.0, 900.0)
     space.iterations = 5
     #space.idle_speed_threshold = 20
-    space.collision_slop = .001
+    space.collision_slop = .01
 
     global scrolling
     scrolling = pymunk.Vec2d(0,0)

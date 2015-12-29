@@ -49,7 +49,7 @@ def main():
         framework.screen.blit(framework.font.render("shapes: " + str(len(framework.space.shapes)), 1, THECOLORS["magenta"]), (0,20))
 
         pygame.display.flip()
-        framework.clock.tick(50)
+        framework.clock.tick(70)
 
 if __name__ == '__main__':
     init()
