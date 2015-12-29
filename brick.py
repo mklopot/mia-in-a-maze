@@ -34,7 +34,7 @@ class StaticBrick():
     def update(self):
         global visibility
         if self.body.position.get_distance(level1.player.body.position) < visibility:
-          scrolled_points = [point - framework.scrolling for point in self.shape.get_points()]
+          scrolled_points = [point - framework.scrolling for point in self.shape.get_vertices()]
           pygame.draw.polygon(framework.screen, THECOLORS["darkgrey"], scrolled_points)       
           pygame.draw.polygon(framework.screen, THECOLORS["black"], scrolled_points, True)
 
@@ -66,7 +66,7 @@ class Brick():
     def update(self):
         global visibility
         if self.body.position.get_distance(level1.player.body.position) < visibility:
-          scrolled_points = [point - framework.scrolling for point in self.shape.get_points()]
+          scrolled_points = [point - framework.scrolling for point in self.shape.get_vertices()]
           pygame.draw.polygon(framework.screen, THECOLORS["brown"], scrolled_points)
           pygame.draw.polygon(framework.screen, THECOLORS["black"], scrolled_points, True)
 
@@ -102,7 +102,7 @@ class Polygon():
     def update(self):
         global visibility
         if self.body.position.get_distance(level1.player.body.position) < visibility:
-          scrolled_points = [point - framework.scrolling for point in self.shape.get_points()]
+          scrolled_points = [point - framework.scrolling for point in self.shape.get_vertices()]
           pygame.draw.polygon(framework.screen, THECOLORS["yellow"], scrolled_points)
           pygame.draw.polygon(framework.screen, THECOLORS["black"], scrolled_points, True)
 
