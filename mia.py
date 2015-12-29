@@ -33,20 +33,17 @@ class Mia(pygame.sprite.Sprite):
         
         self.footcontact = False
         
-#        self.imagelist_left = map(pygame.image.load, sorted(glob.glob('images/mia/mia-left-*.png')))
         self.imagelist_left = [pygame.image.load(imagefile).convert_alpha() for imagefile in  sorted(glob.glob('images/mia/mia-left-*.png'))]
         self.imagelist_right = [pygame.image.load(imagefile).convert_alpha() for imagefile in  sorted(glob.glob('images/mia/mia-right-*.png'))]
-#        self.imagelist_right = map(pygame.image.load, sorted(glob.glob('images/mia/mia-right-*.png')))
         self.left_counter = 0
         self.right_counter = 0
         
         self.animation_counter_max = 8
         self.animation_counter = self.animation_counter_max
 
-        self.grab_joint = None   
+        self.grab_joints = []
         
     def update(self):
-#        self.rect.center = (self.body.position.x - framework.scrolling.x, self.body.position.y - framework.scrolling.y)
         self.rect.center = self.body.position - framework.scrolling
         
         self.animation_counter -= 1
@@ -69,20 +66,24 @@ class Mia(pygame.sprite.Sprite):
     def jump(self):
         if self.footcontact:
             self.body.apply_impulse((0,-10000))
-            #self.body.apply_impulse((0,-1000))
             self.footcontact = False
             
     def movedown(self):
         self.image = self.image_default
 
+    def in_reach(self,other):
+        return math.sqrt((self.body.position.x - other.body.position.x) ** 2 + (self.body.position.y - other.body.position.y) ** 2) < 50
+
     def grab(self):
-        if framework.prize and not self.grab_joint:
-            if math.sqrt((self.body.position.x - framework.prize.body.position.x) ** 2 + (self.body.position.y - framework.prize.body.position.y) ** 2) < 50:
-                 self.grab_joint = pymunk.SlideJoint(self.body, framework.prize.body, (0,0), (0,0), min=5, max=16)
-                 framework.space.add(self.grab_joint)
-        else:
-            framework.space.remove(self.grab_joint)
-            self.grab_joint = None
+        if framework.grabbables:
+             for item in filter(self.in_reach,framework.grabbables):
+                 self.grab_joints.append(pymunk.SlideJoint(self.body, item.body, (0,0), (0,0), min=5, max=16))
+                 framework.space.add(self.grab_joints[-1])
+
+    def drop(self):
+        if self.grab_joints:
+            framework.space.remove(self.grab_joints[-1])
+            self.grab_joints.pop()
 
     def animate_left(self):
         self.image = self.imagelist_left[self.left_counter]

@@ -51,4 +51,5 @@ def init():
     global primitives
     primitives = []
     
-    global prize
+    global grabbables
+    grabbables = []
