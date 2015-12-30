@@ -42,9 +42,6 @@ class StaticBrick():
 class Brick():
 
     def __init__(self, size, x=400, y=400):
-           
-        #self.body = pymunk.Body(10,200)
-        
         points = [(-size, -size), (-size, size), (size,size), (size, -size)]
         mass = 1.0
         moment = pymunk.moment_for_poly(mass, points, (0,0))        
@@ -54,7 +51,6 @@ class Brick():
         self.shape = pymunk.Poly(self.body, points, (0,0))
 
         self.body.position = x,y
-        #self.shape = pymunk.Poly.create_box(self.body, (size,size))
         
         self.shapes = [self.shape]
               
@@ -102,11 +98,18 @@ class Polygon():
     def update(self):
         global visibility
         if self.body.position.get_distance(level1.player.body.position) < visibility:
-          scrolled_points = [point - framework.scrolling for point in self.shape.get_vertices()]
-          pygame.draw.polygon(framework.screen, THECOLORS["yellow"], scrolled_points)
-          pygame.draw.polygon(framework.screen, THECOLORS["black"], scrolled_points, True)
+            scrolled_points = [point - framework.scrolling for point in self.shape.get_vertices()]
+            pygame.draw.polygon(framework.screen, THECOLORS["yellow"], scrolled_points)
+            pygame.draw.polygon(framework.screen, THECOLORS["black"], scrolled_points, True)
 
 
+class Balloon(Polygon):
+    def update(self):
+        global visibility
+        if self.body.position.get_distance(level1.player.body.position) < visibility:
+            scrolled_points = [point - framework.scrolling for point in self.shape.get_vertices()]
+            pygame.draw.polygon(framework.screen, THECOLORS["red"], scrolled_points)
+            pygame.draw.polygon(framework.screen, THECOLORS["black"], scrolled_points, True)
 
         self.body.apply_impulse((0,-200))
 

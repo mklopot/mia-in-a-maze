@@ -58,7 +58,7 @@ def level():
     maze.make_maze(840, 80, width=80, height=12, cellwidth=90, cellheight=65, wallthickness=20)
     
     
-    framework.grabbables.append((brick.Polygon(radius=15, num_pts=6, x=300, y=500)))
+    framework.grabbables.append((brick.Balloon(radius=15, num_pts=6, x=300, y=500)))
     framework.grabbables[0].shape.layers = 0b1000
     framework.grabbables[0].shape.group = 2
 
@@ -66,7 +66,7 @@ def level():
     framework.space.add(framework.grabbables[0].body)
     framework.space.add(framework.grabbables[0].shape)
 
-    framework.grabbables.append((brick.Polygon(radius=15, num_pts=10, x=115, y=525)))
+    framework.grabbables.append((brick.Balloon(radius=15, num_pts=10, x=115, y=525)))
     framework.grabbables[1].shape.layers = 0b1000
     framework.grabbables[1].shape.group = 2
 
