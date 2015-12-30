@@ -58,10 +58,12 @@ class Mia(pygame.sprite.Sprite):
         
         
     def moveleft(self):
-        self.body.apply_impulse((-200,0))
+        if self.body.velocity.x > -200:
+            self.body.apply_impulse((-200,0))
     
     def moveright(self):
-        self.body.apply_impulse((200,0))
+        if self.body.velocity.x < 200:
+            self.body.apply_impulse((200,0))
                 
     def jump(self):
         if self.footcontact:

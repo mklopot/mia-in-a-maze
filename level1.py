@@ -60,10 +60,18 @@ def level():
     
     framework.grabbables.append((brick.Polygon(radius=15, num_pts=6, x=300, y=500)))
     framework.grabbables[0].shape.layers = 0b1000
+    framework.grabbables[0].shape.group = 2
 
     framework.primitives.append(framework.grabbables[0])
     framework.space.add(framework.grabbables[0].body)
     framework.space.add(framework.grabbables[0].shape)
 
+    framework.grabbables.append((brick.Polygon(radius=15, num_pts=10, x=115, y=525)))
+    framework.grabbables[1].shape.layers = 0b1000
+    framework.grabbables[1].shape.group = 2
+
+    framework.primitives.append(framework.grabbables[1])
+    framework.space.add(framework.grabbables[1].body)
+    framework.space.add(framework.grabbables[1].shape)
 #    joint = pymunk.SlideJoint(player.body, prize.body, (0,0), (0,0), min=20, max=27)
 #    framework.space.add(joint)
