@@ -44,7 +44,7 @@ class Mia(pygame.sprite.Sprite):
         self.grab_joints = []
         
     def update(self):
-        if self.body.position.y > 10000:
+        if self.body.position.y > 6000:
             self.body.position.y = -200
             self.body.velocity = (0,0)
         if self.body.position.x > 3000:
