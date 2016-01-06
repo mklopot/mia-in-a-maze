@@ -81,3 +81,6 @@ def level():
     framework.space.add(candy.body)
     candy.add(framework.characters)
     framework.grabbables.append(candy)
+
+    pygame.mixer.music.load("I-Want-Candy.wav")
+    pygame.mixer.music.play(-1)

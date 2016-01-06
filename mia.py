@@ -43,6 +43,8 @@ class Mia(pygame.sprite.Sprite):
 
         self.grab_joints = []
         
+        self.jumpsound = pygame.mixer.Sound("jump.wav")
+        
     def update(self):
         if self.body.position.y > 6000:
             self.body.position.y = -200
@@ -74,6 +76,8 @@ class Mia(pygame.sprite.Sprite):
                 
     def jump(self):
         if self.footcontact:
+            self.jumpsound.stop()
+            self.jumpsound.play()
             self.body.apply_impulse((0,-10000))
             self.footcontact = False
             

@@ -15,7 +15,7 @@ def init():
     global viewport_height
     viewport_height = 600
 
-
+    pygame.mixer.init()
     pygame.init()
     global screen
     screen = pygame.display.set_mode((800, 600))
