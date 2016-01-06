@@ -12,10 +12,12 @@ import mia
 import doomimp
 import brick
 import maze
+import sprite
 
 def level():
     global player
-    player = mia.Mia(x=300,y=450)
+#    player = mia.Mia(x=300,y=450)
+    player = mia.Mia(x=300,y=0)
     framework.space.add(player.body)
     for shape in player.shapes:
         framework.space.add(shape)
@@ -29,8 +31,8 @@ def level():
         npc.add(framework.characters)
             
     bricks = []
-    #for i in range(1,12):
-    #    bricks.append(brick.Brick(size=40, y=45*i))
+    for i in range(1,8):
+        bricks.append(brick.Brick(size=40, x=85*i, y=-400))
     for i in range(1,20):
         bricks.append(brick.Brick(size=10, y=150, x=100+21*i))
     for i in range(1,20):
@@ -75,3 +77,9 @@ def level():
     framework.space.add(framework.grabbables[1].shape)
 #    joint = pymunk.SlideJoint(player.body, prize.body, (0,0), (0,0), min=20, max=27)
 #    framework.space.add(joint)
+    global candy
+    candy = sprite.Basic_Sprite("images/candy.png",500,300,radius=12,mass=.1)
+    framework.space.add(candy.shape)
+    framework.space.add(candy.body)
+    candy.add(framework.characters)
+    framework.grabbables.append(candy)
