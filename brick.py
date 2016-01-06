@@ -16,18 +16,14 @@ class StaticBrick():
         self.body = pymunk.Body(None,None)
         
         points = [(-width/2, -height/2), (-width/2, height/2), (width/2,height/2), (width/2, -height/2)]        
-        
-        #self.body = framework.space.static_body
                 
         self.shape = pymunk.Poly(self.body, points, (0,0))
 
         self.body.position = x,y
-        #self.shape = pymunk.Poly.create_box(self.body, (size,size))
         
         self.shapes = [self.shape]
               
-        #self.shape.elasticity = 0
-        self.shape.friction = 1.0
+        self.shape.friction = 0.5
         self.shape.collision_type = 1
         self.shape.owner = self
         
