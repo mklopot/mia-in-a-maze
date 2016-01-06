@@ -44,6 +44,13 @@ class Mia(pygame.sprite.Sprite):
         self.grab_joints = []
         
     def update(self):
+        if self.body.position.y > 10000:
+            self.body.position.y = -200
+            self.body.velocity = (0,0)
+        if self.body.position.x > 3000:
+            self.body.position.x = 50
+            self.body.velocity = (0,0)
+
         self.rect.center = self.body.position - framework.scrolling
         
         self.animation_counter -= 1
