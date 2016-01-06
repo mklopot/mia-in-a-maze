@@ -75,10 +75,8 @@ def level():
     framework.primitives.append(framework.grabbables[1])
     framework.space.add(framework.grabbables[1].body)
     framework.space.add(framework.grabbables[1].shape)
-#    joint = pymunk.SlideJoint(player.body, prize.body, (0,0), (0,0), min=20, max=27)
-#    framework.space.add(joint)
-    global candy
-    candy = sprite.Basic_Sprite("images/candy.png",500,300,radius=12,mass=.1)
+
+    candy = sprite.Basic_Sprite("images/candy.png",500,300,width=12,height=10,mass=.1)
     framework.space.add(candy.shape)
     framework.space.add(candy.body)
     candy.add(framework.characters)
