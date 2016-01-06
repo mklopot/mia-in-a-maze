@@ -7,6 +7,8 @@ from pygame.color import *
 import pymunk
 import math
 
+debug = False
+
 def init():
     global viewport_width
     viewport_width = 800

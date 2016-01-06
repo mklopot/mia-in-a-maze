@@ -2,10 +2,16 @@
 
 import random
 import sys
-#sys.setrecursionlimit(9999999)
 
 import framework
 import brick
+
+if framework.debug:
+    def dprint(*output):
+        print(output)
+else:
+    def dprint(*output):
+        pass
 
 def make_grid(width, height, start=(0,0)):
     """Generates a random maze, returns an array of cells, each cell contains some walls"""
@@ -24,22 +30,21 @@ def make_grid(width, height, start=(0,0)):
 
     process_cell(start)
     
-    print grid
     return grid
 
 
 def process_cell(cell):
     """Processes the maze one cell at a time, carving out walls, moving to neighboring cells, and recursively calling itself"""
     global opposite
-    print "Function 'process_cell' called with", cell
-    print "At cell: ",(cell)
+    dprint("Function 'process_cell' called with", cell)
+    dprint("At cell: ",(cell))
     global grid
-    print grid[cell[0]][cell[1]]
+    dprint(grid[cell[0]][cell[1]])
     directions = (['up', 'down', 'left', 'right'])
     random.shuffle(directions)
     nextcell = list(cell)
     for direction in directions:
-        print "Trying to go " + direction
+        dprint("Trying to go " + direction)
         if direction == 'up':
             nextcell[0] = cell[0]
             nextcell[1] = cell[1] + 1
@@ -58,22 +63,24 @@ def process_cell(cell):
         
         
         if (0 <= nextcell[0] <= (gridheight -1)) and (0 <= nextcell[1] <= (gridwidth -1)):
-            print "Destination within bounds:",(nextcell)
+            dprint("Destination within bounds:",(nextcell))
             
             nextgridcell = grid[nextcell[0]][nextcell[1]]
-            print nextgridcell
+            dprint(nextgridcell)
             if (nextgridcell == set(["up", "down", "left", "right"])):
                 gridcell = grid[cell[0]][cell[1]]
-                print "carving: " + direction + " wall from "+str(cell)
+                dprint("carving: " + direction + " wall from "+str(cell))
                 gridcell.difference_update(set([direction]))
-                print "carving: " + opposite[direction] + " wall from "+str(cell)
+                dprint("carving: " + opposite[direction] + " wall from "+str(cell))
                 nextgridcell.difference_update(set([opposite[direction]]))
-                print "Carved:", gridcell 
+                dprint("Carved:", gridcell) 
                 process_cell(nextcell)
             else:
-                print "Cell ", nextcell, " already visited, going back..." 
+                pass
+                dprint("Cell ", nextcell, " already visited, going back..." )
         else:
-            print "Destination out of bounds: ", nextcell
+            pass
+            dprint("Destination out of bounds: ", nextcell)
 
  
 def make_maze(x, y, width, height, cellwidth, cellheight, wallthickness):
@@ -89,13 +96,11 @@ def make_maze(x, y, width, height, cellwidth, cellheight, wallthickness):
                 framework.primitives.append(downbrick)
             elif j % 2 == 1:
                 downbrick = brick.StaticBrick(wallthickness*2, wallthickness, x + i * cellwidth - cellwidth/2 + wallthickness, y + j * cellheight + cellheight/2)
-#                downbrick = brick.StaticBrick(20, wallthickness, x + i * cellwidth - cellwidth/2 + wallthickness, y + j * cellheight + cellheight/2)
                 downbrick.shape.group = 1
                 framework.space.add(downbrick.shape)
                 framework.primitives.append(downbrick)
             else:
                 downbrick = brick.StaticBrick(wallthickness*2, wallthickness, x + i * cellwidth + cellwidth/2 - wallthickness, y + j * cellheight + cellheight/2)
-#                downbrick = brick.StaticBrick(20, wallthickness, x + i * cellwidth + cellwidth/2 - wallthickness, y + j * cellheight + cellheight/2)
                 downbrick.shape.group = 1
                 framework.space.add(downbrick.shape)
                 framework.primitives.append(downbrick)
