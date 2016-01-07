@@ -19,15 +19,16 @@ class Mia(pygame.sprite.Sprite):
         self.body.position = x,y
         self.body.velocity_limit = 300
         
-        self.main_shape = pymunk.Circle(self.body, 11, offset=(0,-5))
+        #self.main_shape = pymunk.Circle(self.body, 11, offset=(0,-5))
+        self.main_shape = pymunk.Poly.create_box(self.body, size=(12,17), offset=(0,-5))
         self.main_shape.layers = self.main_shape.layers ^ 0b1000
-        self.feet_shape = pymunk.Poly(self.body, [(3,5),(-3,5),(-3,15),(3,15)])
+        self.feet_shape = pymunk.Poly(self.body, [(6,10),(-6,10),(-6,15),(6,15)])
         
         self.shapes = [self.main_shape, self.feet_shape]
               
         self.main_shape.elasticity = self.feet_shape.elasticity = 0.3
         self.feet_shape.friction = .9
-        self.main_shape.friction = .3
+        self.main_shape.friction = .1
         self.feet_shape.collision_type = 2
         self.feet_shape.owner = self
         
