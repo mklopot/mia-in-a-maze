@@ -36,9 +36,9 @@ class Basic_Sprite(pygame.sprite.Sprite):
         self.rect.center = self.body.position - framework.scrolling
         self.image = framework.rot_center(self.image_default, math.degrees(-self.body.angle))
         if framework.debug:
-            x,y = self.body.position - framework.scrolling
-            scrolled_points = int(x),int(y)
-            pygame.draw.circle(framework.screen, pygame.color.THECOLORS["black"], scrolled_points, 9, True)
+            scrolled_points = [point - framework.scrolling for point in self.shape.get_vertices()]
+            pygame.draw.polygon(framework.screen, pygame.color.THECOLORS["green"], scrolled_points, True)
+
 
 
         
