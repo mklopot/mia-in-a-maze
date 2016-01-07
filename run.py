@@ -36,7 +36,8 @@ def main():
             framework.scrolling.y += level1.player.rect.center[1] - framework.viewport_height + framework.scrolling_margin
 
 
-        framework.screen.fill(THECOLORS["lightblue"])
+        #framework.screen.fill(THECOLORS["lightblue"])
+        framework.screen.fill(pygame.Color(115,165,250))
         framework.characters.update()
         
         for primitive in framework.primitives:
