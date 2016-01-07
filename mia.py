@@ -48,10 +48,11 @@ class Mia(pygame.sprite.Sprite):
         
     def update(self):
         if self.body.position.y > 6000:
-            self.body.position.y = -200
+            self.body.position.y = -300
             self.body.velocity = (0,0)
-        if self.body.position.x > 3000:
+        if self.body.position.x > 4000 or self.body.position.x < -2000:
             self.body.position.x = 50
+            self.body.position.y = -300
             self.body.velocity = (0,0)
 
         self.rect.center = self.body.position - framework.scrolling
