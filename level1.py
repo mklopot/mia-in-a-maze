@@ -84,3 +84,4 @@ def level():
 
     pygame.mixer.music.load("I-Want-Candy.wav")
     pygame.mixer.music.play(-1)
+    pygame.mixer.music.set_volume(.15)
