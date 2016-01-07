@@ -7,7 +7,8 @@ from pygame.color import *
 import pymunk
 import math
 
-debug = False
+#debug = False
+debug = True
 
 def init():
     global viewport_width
@@ -30,7 +31,7 @@ def init():
     
     global space
     space = pymunk.Space()
-    space.collision_bias = pow(1.0 - 0.3, 70.0)
+    space.collision_bias = pow(1.0 - 0.2, 70.0)
     space.gravity = (0.0, 900.0)
     space.iterations = 5
     #space.idle_speed_threshold = 20
