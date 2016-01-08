@@ -76,11 +76,19 @@ def level():
     framework.space.add(framework.grabbables[1].body)
     framework.space.add(framework.grabbables[1].shape)
 
-    candy = sprite.Basic_Sprite("images/candy.png",500,300,width=12,height=10,mass=.1)
-    framework.space.add(candy.shape)
-    framework.space.add(candy.body)
-    candy.add(framework.characters)
-    framework.grabbables.append(candy)
+    candies = []
+    for i in range(100):
+        candies.append(sprite.Basic_Sprite("images/candy.png",500,300,width=10,height=8,mass=.1))
+    for candy in candies:
+        framework.space.add(candy.shape)
+        framework.space.add(candy.body)
+        candy.add(framework.characters)
+    framework.grabbables.extend(candies)
+
+    barrel = sprite.Basic_Sprite("images/barrel.png",700,300,width=15,height=35,mass=10,jumpable=1)
+    framework.space.add(barrel.shape)
+    framework.space.add(barrel.body)
+    barrel.add(framework.characters)
 
     pygame.mixer.music.load("I-Want-Candy.wav")
     pygame.mixer.music.play(-1)
