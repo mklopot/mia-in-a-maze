@@ -19,16 +19,16 @@ class Mia(pygame.sprite.Sprite):
         self.body.position = x,y
         self.body.velocity_limit = 300
         
-        #self.main_shape = pymunk.Circle(self.body, 11, offset=(0,-5))
-        self.main_shape = pymunk.Poly.create_box(self.body, size=(12,17), offset=(0,-5))
+        self.main_shape = pymunk.Poly.create_box(self.body, size=(16,34), offset=(0,-1))
         self.main_shape.layers = self.main_shape.layers ^ 0b1000
-        self.feet_shape = pymunk.Poly(self.body, [(6,10),(-6,10),(-6,15),(6,15)])
+        self.feet_shape = pymunk.Poly(self.body, [(5,14),(-5,14),(-5,14),(5,14)],offset=(0,2))
         
         self.shapes = [self.main_shape, self.feet_shape]
               
-        self.main_shape.elasticity = self.feet_shape.elasticity = 0.3
+        self.main_shape.elasticity = 0
+        self.feet_shape.elasticity = 0
         self.feet_shape.friction = .9
-        self.main_shape.friction = .1
+        self.main_shape.friction = .9
         self.feet_shape.collision_type = 2
         self.feet_shape.owner = self
         
@@ -47,6 +47,10 @@ class Mia(pygame.sprite.Sprite):
         self.jumpsound = pygame.mixer.Sound("jump.wav")
         
     def update(self):
+        if framework.debug:
+            for shape in self.shapes:
+                scrolled_points = [point - framework.scrolling for point in shape.get_vertices()]
+                pygame.draw.polygon(framework.screen, pygame.color.THECOLORS["green"], scrolled_points, True)
         if self.body.position.y > 6000:
             self.body.position.y = -300
             self.body.velocity = (0,0)
