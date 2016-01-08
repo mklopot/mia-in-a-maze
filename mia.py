@@ -19,7 +19,7 @@ class Mia(pygame.sprite.Sprite):
         self.body.position = x,y
         self.body.velocity_limit = 300
         
-        self.main_shape = pymunk.Poly.create_box(self.body, size=(16,34), offset=(0,-1))
+        self.main_shape = pymunk.Poly.create_box(self.body, size=(18,34), offset=(0,-1))
         self.main_shape.layers = self.main_shape.layers ^ 0b1000
         self.feet_shape = pymunk.Poly(self.body, [(5,14),(-5,14),(-5,14),(5,14)],offset=(0,2))
         
