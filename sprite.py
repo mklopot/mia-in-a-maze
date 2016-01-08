@@ -6,7 +6,7 @@ import math
 import framework
 
 class Basic_Sprite(pygame.sprite.Sprite):
-    def __init__(self,image,x,y,angle=0,angular_velocity=0,width=10,height=10,mass=1,elasticity=.3,friction=.8,offset=(0,0)):
+    def __init__(self,image,x,y,angle=0,angular_velocity=0,width=10,height=10,mass=1,elasticity=0,friction=.8,offset=(0,0),jumpable=0):
         pygame.sprite.Sprite.__init__(self)
         self.image_default = pygame.image.load(image).convert_alpha()
         self.image = self.image_default
@@ -29,7 +29,7 @@ class Basic_Sprite(pygame.sprite.Sprite):
               
         self.shape.elasticity = elasticity
         self.shape.friction = friction
-        self.shape.collision_type = 0    # 0 - can't jump off of it; 1 - can jump when standing on it
+        self.shape.collision_type = jumpable    # 0 - can't jump off of it; 1 - can jump when standing on it
         
 
     def update(self):
