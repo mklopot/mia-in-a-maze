@@ -20,6 +20,8 @@ def getinput(actor):
                 actor.grab()
             elif event.key == K_d:
                 actor.drop()
+            elif event.key == K_c | KMOD_LCTRL:
+                pygame.quit()
                 
       
 
