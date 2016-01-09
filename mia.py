@@ -89,6 +89,7 @@ class Mia(pygame.sprite.Sprite):
             
     def movedown(self):
         self.image = self.image_default
+        self.body.apply_impulse((0,50))
 
     def in_reach(self,other):
         return math.sqrt((self.body.position.x - other.body.position.x) ** 2 + (self.body.position.y - other.body.position.y) ** 2) < 50
