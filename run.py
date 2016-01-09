@@ -9,8 +9,9 @@ import math
 
 import framework
 import keyinput
-import level1
+#import level1 
 
+currentlevel = __import__("level1")
 
 def to_pygame(p):
     """Small hack to convert pymunk to pygame coordinates"""
@@ -20,20 +21,24 @@ def to_pygame(p):
 
 def init():
     framework.init()
-    level1.level()   
+    currentlevel.level()   
 
 def main():
     while True:
-        keyinput.getinput(level1.player)
-        
-        if level1.player.rect.center[0] < framework.scrolling_margin:
-            framework.scrolling.x -= framework.scrolling_margin - level1.player.rect.center[0]      
-        if level1.player.rect.center[1] < framework.scrolling_margin:
-            framework.scrolling.y -= framework.scrolling_margin - level1.player.rect.center[1]      
-        if level1.player.rect.center[0] > framework.viewport_width - framework.scrolling_margin:
-            framework.scrolling.x += level1.player.rect.center[0] - framework.viewport_width + framework.scrolling_margin 
-        if level1.player.rect.center[1] > framework.viewport_height - framework.scrolling_margin:
-            framework.scrolling.y += level1.player.rect.center[1] - framework.viewport_height + framework.scrolling_margin
+        metainput = keyinput.getinput(currentlevel.player)
+        if metainput == 0:
+            currentlevel.player = currentlevel.playable[0]
+        if metainput == 1:
+            currentlevel.player = currentlevel.playable[1]
+
+        if currentlevel.player.rect.center[0] < framework.scrolling_margin:
+            framework.scrolling.x -= framework.scrolling_margin - currentlevel.player.rect.center[0]      
+        if currentlevel.player.rect.center[1] < framework.scrolling_margin:
+            framework.scrolling.y -= framework.scrolling_margin - currentlevel.player.rect.center[1]      
+        if currentlevel.player.rect.center[0] > framework.viewport_width - framework.scrolling_margin:
+            framework.scrolling.x += currentlevel.player.rect.center[0] - framework.viewport_width + framework.scrolling_margin 
+        if currentlevel.player.rect.center[1] > framework.viewport_height - framework.scrolling_margin:
+            framework.scrolling.y += currentlevel.player.rect.center[1] - framework.viewport_height + framework.scrolling_margin
 
 
         #framework.screen.fill(THECOLORS["lightblue"])
