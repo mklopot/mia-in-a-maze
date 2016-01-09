@@ -9,6 +9,7 @@ import math
 
 import framework
 import mia
+import cassie
 import doomimp
 import brick
 import maze
@@ -22,6 +23,15 @@ def level():
     for shape in player.shapes:
         framework.space.add(shape)
     player.add(framework.characters)    
+
+    player2 = cassie.Cassie(x=600,y=0)
+    framework.space.add(player2.body)
+    for shape in player2.shapes:
+        framework.space.add(shape)
+    player2.add(framework.characters)    
+    
+    global playable
+    playable = [player, player2]
 
     npcs = [doomimp.DoomImp(x=200, y=250, target=player), doomimp.DoomImp(x=600, y=150, target=player), doomimp.DoomImp(x=550,y=560,target=player)]
     for npc in npcs:
@@ -85,7 +95,7 @@ def level():
         candy.add(framework.characters)
     framework.grabbables.extend(candies)
 
-    barrel = sprite.Basic_Sprite("images/barrel.png",700,300,width=15,height=35,mass=10,jumpable=1)
+    barrel = sprite.Basic_Sprite("images/barrel.png",430,0,width=15,height=35,mass=10,jumpable=1,offset=(0,-1))
     framework.space.add(barrel.shape)
     framework.space.add(barrel.body)
     barrel.add(framework.characters)
