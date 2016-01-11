@@ -14,6 +14,7 @@ import doomimp
 import brick
 import maze
 import sprite
+import airship
 
 def level():
     global player
@@ -99,6 +100,12 @@ def level():
     framework.space.add(barrel.shape)
     framework.space.add(barrel.body)
     barrel.add(framework.characters)
+ 
+    dirigible = airship.AirshipGondola()
+    framework.space.add(dirigible.body)
+    for shape in dirigible.shapes:
+        framework.space.add(shape)
+    dirigible.add(framework.characters)
 
     pygame.mixer.music.load("I-Want-Candy.wav")
     pygame.mixer.music.play(-1)
