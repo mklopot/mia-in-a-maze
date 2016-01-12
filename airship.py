@@ -54,3 +54,39 @@ class AirshipGondola(pygame.sprite.Sprite):
             for shape in self.shapes:
                 scrolled_points = [point - framework.scrolling for point in shape.get_vertices()]
                 pygame.draw.polygon(framework.screen, pygame.color.THECOLORS["green"], scrolled_points, True)
+
+class AirshipBalloon(pygame.sprite.Sprite):
+    def __init__(self,x=600,y=-20,angle=0,angular_velocity=0,buoyancy=(0,-10)):
+        pygame.sprite.Sprite.__init__(self)
+        self.image_default = pygame.image.load("images/airship-balloon.png").convert_alpha()
+        self.image = self.image_default
+        
+        self.rect = self.image.get_rect()
+        self.rect.center = (x, y)
+        
+        offset = (0,0) # center of gravity
+        points = [(-210, -7), (-196, -24), (-82, -56), (-26, -60), (27, -60), (83, -56), (197, -24), (212, -7), (212, 6), (197, 25), (83, 57), (27, 61), (-26, 61), (-82, 57), (-196, 25), (-210, 8)]
+        mass = 10
+        moment = pymunk.moment_for_poly(mass,points)
+        self.body = pymunk.Body(mass,moment)
+        self.body.position = x,y
+        self.body.angular_velocity = angular_velocity
+        self.body.velocity_limit = 300
+        
+
+        self.shape = pymunk.Poly(self.body, points)
+        self.shapes = [self.shape]
+        
+        self.shape.elasticity = 1
+        self.shape.friction = .5
+        self.shape.collision_type = 1    # 0 - can't jump off of it; 1 - can jump when standing on it
+
+        self.body.apply_force(buoyancy)
+        
+
+    def update(self):
+        self.rect.center = self.body.position - framework.scrolling
+        self.image = framework.rot_center(self.image_default, math.degrees(-self.body.angle))
+        if framework.debug:
+            scrolled_points = [point - framework.scrolling for point in self.shape.get_vertices()]
+            pygame.draw.polygon(framework.screen, pygame.color.THECOLORS["green"], scrolled_points, True)
