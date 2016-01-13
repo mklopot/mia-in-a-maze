@@ -32,7 +32,8 @@ def init():
     global space
     space = pymunk.Space()
     space.collision_bias = pow(1.0 - 0.1, 70.0)
-    space.gravity = (0.0, 900.0)
+    #space.gravity = (0.0, 900.0)
+    space.gravity = (0.0, 500.0)
     space.iterations = 5
     #space.idle_speed_threshold = 20
     space.collision_slop = .0001
@@ -51,7 +52,13 @@ def init():
         arbiter.shapes[0].owner.footcontact = True
         return True
     space.add_collision_handler(2,1, post_solve=footcontact_handler)
-    
+
+    def vehicle_handler(space,arbiter):
+        arbiter.shapes[0].owner.vehicle = arbiter.shapes[1].owner
+        arbiter.shapes[0].owner.footcontact = True
+        return True
+    space.add_collision_handler(2,3, post_solve=vehicle_handler) 
+
     global primitives
     primitives = []
     

@@ -45,6 +45,8 @@ class Cassie(pygame.sprite.Sprite):
         self.grab_joints = []
         
         self.jumpsound = pygame.mixer.Sound("jump.wav")
+ 
+        self.vehicle = None
         
     def update(self):
         if framework.debug:
@@ -64,7 +66,7 @@ class Cassie(pygame.sprite.Sprite):
         self.animation_counter -= 1
         if self.animation_counter == 0:
             self.animation_counter = self.animation_counter_max
-            if abs(self.body.velocity.x) < .001:
+            if abs(self.body.velocity.x) < .0001:
                 self.image = self.image_default
             elif self.body.velocity.x > 0:
                 self.animate_right()
@@ -116,3 +118,16 @@ class Cassie(pygame.sprite.Sprite):
         self.right_counter += 1
         if self.right_counter > (len(self.imagelist_right) - 1):
             self.right_counter = 0
+
+    def vehicle_down(self):
+        if self.vehicle:
+            self.vehicle.down()
+    def vehicle_up(self):
+        if self.vehicle:
+            self.vehicle.up()
+    def vehicle_left(self):
+        if self.vehicle:
+            self.vehicle.left()
+    def vehicle_right(self):
+        if self.vehicle:
+            self.vehicle.right()

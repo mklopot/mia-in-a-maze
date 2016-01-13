@@ -30,7 +30,7 @@ class AirshipGondola(pygame.sprite.Sprite):
         self.body = pymunk.Body(mass,moment)
         self.body.position = x,y
         self.body.angular_velocity = angular_velocity
-        self.body.velocity_limit = 300
+        self.body.velocity_limit = 50
         
 
         self.bow = pymunk.Poly(self.body, points_bow, offset)
@@ -41,11 +41,12 @@ class AirshipGondola(pygame.sprite.Sprite):
         
         #self.shapes = [self.bow, self.stern]
         self.shapes = [self.bow, self.midship, self.stern]
-        
+        self.balloon = None     
         for shape in self.shapes:      
-            shape.elasticity = 0
-            shape.friction = 1
-            shape.collision_type = 1    # 0 - can't jump off of it; 1 - can jump when standing on it
+            shape.owner = self
+            shape.elasticity = .1
+            shape.friction = pymunk.inf
+            shape.collision_type = 3    # 0 - can't jump off of it; 1 - can jump when standing on it
         
 
     def update(self):
@@ -55,6 +56,17 @@ class AirshipGondola(pygame.sprite.Sprite):
             for shape in self.shapes:
                 scrolled_points = [point - framework.scrolling for point in shape.get_vertices()]
                 pygame.draw.polygon(framework.screen, pygame.color.THECOLORS["green"], scrolled_points, True)
+    
+    def left(self):
+        self.body.apply_impulse((-150,0),(0,20))
+    def right(self):
+        self.body.apply_impulse((150,0),(0,20))
+    def down(self):
+        if self.balloon:
+            self.balloon.body.apply_force((0,50),(0,0))
+    def up(self):
+        if self.balloon:
+            self.balloon.body.apply_force((0,-50),(0,0))
 
 class AirshipBalloon(pygame.sprite.Sprite):
     def __init__(self,x=600,y=-20,angle=0,angular_velocity=0,buoyancy=(0,-8000)):
@@ -94,9 +106,10 @@ class AirshipBalloon(pygame.sprite.Sprite):
 
 
 class Airship():
-    def __init__(self,x=600, y=-20, buoyancy = (0,-41000)):
+    def __init__(self,x=600, y=-20, buoyancy = (0,-26000)):
         balloon = AirshipBalloon(x,y,buoyancy=buoyancy)
         gondola = AirshipGondola(x,y+80)
+        gondola.balloon = balloon
         self.rope1 = pymunk.constraint.SlideJoint(balloon.body,gondola.body,(-300,0),(-150,0),0,250)
         self.rope2 = pymunk.constraint.SlideJoint(balloon.body,gondola.body,(300,0),(150,0),0,250)
 
