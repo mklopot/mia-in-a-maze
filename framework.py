@@ -7,19 +7,21 @@ from pygame.color import *
 import pymunk
 import math
 
-debug = False
-#debug = True
+#debug = False
+debug = True
 
 def init():
     global viewport_width
-    viewport_width = 800
+    #viewport_width = 800
+    viewport_width =1024 
     global viewport_height
-    viewport_height = 600
+    #viewport_height = 600
+    viewport_height = 768
 
     pygame.mixer.init()
     pygame.init()
     global screen
-    screen = pygame.display.set_mode((800, 600))
+    screen = pygame.display.set_mode((viewport_width, viewport_height))
     pygame.display.set_caption("Mia in a Maze")
     pygame.key.set_repeat(10)
     
@@ -32,7 +34,8 @@ def init():
     global space
     space = pymunk.Space()
     space.collision_bias = pow(1.0 - 0.1, 70.0)
-    space.gravity = (0.0, 900.0)
+    #space.gravity = (0.0, 900.0)
+    space.gravity = (0.0, 500.0)
     space.iterations = 5
     #space.idle_speed_threshold = 20
     space.collision_slop = .0001
@@ -41,7 +44,7 @@ def init():
     global scrolling
     scrolling = pymunk.Vec2d(0,0)
     global scrolling_margin
-    scrolling_margin = 200
+    scrolling_margin = 300
     
     global characters
     characters = pygame.sprite.Group()
@@ -51,7 +54,13 @@ def init():
         arbiter.shapes[0].owner.footcontact = True
         return True
     space.add_collision_handler(2,1, post_solve=footcontact_handler)
-    
+
+    def vehicle_handler(space,arbiter):
+        arbiter.shapes[0].owner.vehicle = arbiter.shapes[1].owner
+        arbiter.shapes[0].owner.footcontact = True
+        return True
+    space.add_collision_handler(2,3, post_solve=vehicle_handler) 
+
     global primitives
     primitives = []
     

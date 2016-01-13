@@ -20,6 +20,21 @@ def getinput(actor):
                 actor.grab()
             elif event.key == K_d:
                 actor.drop()
+            elif event.key == K_h:
+                actor.vehicle_left()
+            elif event.key == K_l:
+                actor.vehicle_right()
+            elif event.key == K_j:
+                actor.vehicle_down()
+            elif event.key == K_k:
+                actor.vehicle_up()
+
+
+
+
+
+
+
             elif event.key == K_c | KMOD_LCTRL:
                 pygame.quit()
             elif event.key == K_F1:

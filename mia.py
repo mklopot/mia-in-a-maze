@@ -116,3 +116,12 @@ class Mia(pygame.sprite.Sprite):
         self.right_counter += 1
         if self.right_counter > (len(self.imagelist_right) - 1):
             self.right_counter = 0
+
+    def vehicle_left(self):
+        pass
+    def vehicle_right(self):
+        pass
+    def vehicle_up(self):
+        pass
+    def vehicle_down(self):
+        pass

@@ -95,10 +95,14 @@ def level():
         candy.add(framework.characters)
     framework.grabbables.extend(candies)
 
-    barrel = sprite.Basic_Sprite("images/barrel.png",430,0,width=15,height=35,mass=10,jumpable=1,offset=(0,-1))
+    barrel = sprite.Basic_Sprite("images/barrel.png",430,0,width=15,height=33,mass=10,jumpable=1,offset=(0,-1))
     framework.space.add(barrel.shape)
     framework.space.add(barrel.body)
     barrel.add(framework.characters)
+
+    global airship1
+    airship1 = airship.Airship()
+    
 
     pygame.mixer.music.load("I-Want-Candy.wav")
     pygame.mixer.music.play(-1)
