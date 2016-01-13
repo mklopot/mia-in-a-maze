@@ -14,6 +14,7 @@ import doomimp
 import brick
 import maze
 import sprite
+import airship
 
 def level():
     global player
