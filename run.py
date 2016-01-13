@@ -54,6 +54,8 @@ def main():
         if framework.debug:
             framework.screen.blit(framework.font.render("fps: " + str(framework.clock.get_fps()), 1, THECOLORS["green"]), (0,0))
             framework.screen.blit(framework.font.render("shapes: " + str(len(framework.space.shapes)), 1, THECOLORS["green"]), (0,20))
+            if currentlevel.airship1:
+                framework.screen.blit(framework.font.render("buoyancy: " + str((currentlevel.airship1.balloon.buoyancy[1])), 1, THECOLORS["green"]), (0,40))
 
         pygame.display.flip()
         framework.clock.tick(70)

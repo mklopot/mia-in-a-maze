@@ -112,6 +112,7 @@ def level():
 #    framework.space.add(airship_balloon.shape)
 #    airship_balloon.add(framework.characters)
 
+    global airship1
     airship1 = airship.Airship()
     
 
