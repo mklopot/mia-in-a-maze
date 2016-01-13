@@ -25,6 +25,7 @@ class AirshipGondola(pygame.sprite.Sprite):
         mass_stern = 10
         mass = mass_bow + mass_midship + mass_stern
         moment = pymunk.moment_for_poly(mass_bow,points_bow,offset) + pymunk.moment_for_poly(mass_stern,points_stern,offset)
+        moment *= 3
         #moment = pymunk.moment_for_poly(mass_bow,points_bow,offset) + pymunk.moment_for_poly(mass_midship,points_midship,offset) + pymunk.moment_for_poly(mass_stern,points_stern,offset)
         self.body = pymunk.Body(mass,moment)
         self.body.position = x,y
@@ -56,7 +57,7 @@ class AirshipGondola(pygame.sprite.Sprite):
                 pygame.draw.polygon(framework.screen, pygame.color.THECOLORS["green"], scrolled_points, True)
 
 class AirshipBalloon(pygame.sprite.Sprite):
-    def __init__(self,x=600,y=-20,angle=0,angular_velocity=0,buoyancy=(0,-10)):
+    def __init__(self,x=600,y=-20,angle=0,angular_velocity=0,buoyancy=(0,-8000)):
         pygame.sprite.Sprite.__init__(self)
         self.image_default = pygame.image.load("images/airship-balloon.png").convert_alpha()
         self.image = self.image_default
@@ -90,3 +91,23 @@ class AirshipBalloon(pygame.sprite.Sprite):
         if framework.debug:
             scrolled_points = [point - framework.scrolling for point in self.shape.get_vertices()]
             pygame.draw.polygon(framework.screen, pygame.color.THECOLORS["green"], scrolled_points, True)
+
+
+class Airship():
+    def __init__(self,x=600, y=-20, buoyancy = (0,-41000)):
+        balloon = AirshipBalloon(x,y,buoyancy=buoyancy)
+        gondola = AirshipGondola(x,y+80)
+        self.rope1 = pymunk.constraint.SlideJoint(balloon.body,gondola.body,(-300,0),(-150,0),0,250)
+        self.rope2 = pymunk.constraint.SlideJoint(balloon.body,gondola.body,(300,0),(150,0),0,250)
+
+        framework.space.add(gondola.body)
+        for shape in gondola.shapes:
+            framework.space.add(shape)
+        gondola.add(framework.characters)
+
+        framework.space.add(balloon.body)
+        framework.space.add(balloon.shape)
+        balloon.add(framework.characters)
+        framework.space.add(self.rope1)
+        framework.space.add(self.rope2)
+

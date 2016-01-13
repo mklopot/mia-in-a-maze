@@ -101,16 +101,18 @@ def level():
     framework.space.add(barrel.body)
     barrel.add(framework.characters)
  
-    dirigible = airship.AirshipGondola()
-    framework.space.add(dirigible.body)
-    for shape in dirigible.shapes:
-        framework.space.add(shape)
-    dirigible.add(framework.characters)
+    #dirigible = airship.AirshipGondola()
+    #framework.space.add(dirigible.body)
+    #for shape in dirigible.shapes:
+    #    framework.space.add(shape)
+    #dirigible.add(framework.characters)
+#
+#    airship_balloon = airship.AirshipBalloon()
+#    framework.space.add(airship_balloon.body)
+#    framework.space.add(airship_balloon.shape)
+#    airship_balloon.add(framework.characters)
 
-    airship_balloon = airship.AirshipBalloon()
-    framework.space.add(airship_balloon.body)
-    framework.space.add(airship_balloon.shape)
-    airship_balloon.add(framework.characters)
+    airship1 = airship.Airship()
     
 
     pygame.mixer.music.load("I-Want-Candy.wav")
