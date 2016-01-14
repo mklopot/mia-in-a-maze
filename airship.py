@@ -109,7 +109,7 @@ class AirshipBalloon(pygame.sprite.Sprite):
 
 
 class Airship():
-    def __init__(self,x=600, y=-20, buoyancy = pymunk.Vec2d(0,-25000)):
+    def __init__(self,x=600, y=-20, buoyancy = pymunk.Vec2d(0,-34000)):
         balloon = AirshipBalloon(x,y,buoyancy=buoyancy)
         gondola = AirshipGondola(x,y+80)
         self.balloon = gondola.balloon = balloon

@@ -32,17 +32,23 @@ def main():
             currentlevel.player = currentlevel.playable[1]
 
         if currentlevel.player.rect.center[0] < framework.scrolling_margin:
-            framework.scrolling.x -= framework.scrolling_margin - currentlevel.player.rect.center[0]      
+#            framework.scrolling.x -= framework.scrolling_margin - currentlevel.player.rect.center[0]      
+            framework.scrolling.x -= (framework.scrolling_margin - currentlevel.player.rect.center[0]) * .1      
         if currentlevel.player.rect.center[1] < framework.scrolling_margin:
-            framework.scrolling.y -= framework.scrolling_margin - currentlevel.player.rect.center[1]      
+#            framework.scrolling.y -= framework.scrolling_margin - currentlevel.player.rect.center[1]      
+            framework.scrolling.y -= (framework.scrolling_margin - currentlevel.player.rect.center[1]) * .1      
         if currentlevel.player.rect.center[0] > framework.viewport_width - framework.scrolling_margin:
-            framework.scrolling.x += currentlevel.player.rect.center[0] - framework.viewport_width + framework.scrolling_margin 
+#            framework.scrolling.x += currentlevel.player.rect.center[0] - framework.viewport_width + framework.scrolling_margin 
+            framework.scrolling.x += (currentlevel.player.rect.center[0] - framework.viewport_width + framework.scrolling_margin ) * .1
         if currentlevel.player.rect.center[1] > framework.viewport_height - framework.scrolling_margin:
-            framework.scrolling.y += currentlevel.player.rect.center[1] - framework.viewport_height + framework.scrolling_margin
+#            framework.scrolling.y += currentlevel.player.rect.center[1] - framework.viewport_height + framework.scrolling_margin
+            framework.scrolling.y += (currentlevel.player.rect.center[1] - framework.viewport_height + framework.scrolling_margin) * .1
 
 
         #framework.screen.fill(THECOLORS["lightblue"])
-        framework.screen.fill(pygame.Color(115,165,250))
+        colormod = 165- int(abs((currentlevel.player.body.position.y - 700) / 40)) % 165
+        #framework.screen.fill(pygame.Color(115,165,250))
+        framework.screen.fill(pygame.Color(115,colormod,250))
         framework.characters.update()
         
         for primitive in framework.primitives:

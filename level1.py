@@ -59,7 +59,7 @@ def level():
     staticbricks = []
     staticbricks.append(brick.StaticBrick(x=425, y=50, width=50, height=10))
     staticbricks.append(brick.StaticBrick(x=350, y=270, width=10, height=420))
-    staticbricks.append(brick.StaticBrick(x=370, y=620, width=800, height=10))
+    staticbricks.append(brick.StaticBrick(x=370, y=640, width=800, height=10))
     for staticbrick in staticbricks:
         framework.primitives.append(staticbrick)
         framework.space.add(staticbrick.shape)
