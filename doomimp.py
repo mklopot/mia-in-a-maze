@@ -33,8 +33,11 @@ class DoomImp(pygame.sprite.Sprite):
         
         self.footcontact = False
         
-        self.imagelist_left = map(pygame.image.load, sorted(glob.glob('images/imp/imp-left-*.png')))
-        self.imagelist_right = map(pygame.image.load, sorted(glob.glob('images/imp/imp-right-*.png')))
+#        self.imagelist_left = map(pygame.image.load, sorted(glob.glob('images/imp/imp-left-*.png')))
+#        self.imagelist_right = map(pygame.image.load, sorted(glob.glob('images/imp/imp-right-*.png')))
+        self.imagelist_left = [pygame.image.load(imagefile).convert_alpha() for imagefile in  sorted(glob.glob('images/imp/imp-left-*.png'))]
+        self.imagelist_right = [pygame.image.load(imagefile).convert_alpha() for imagefile in  sorted(glob.glob('images/imp/imp-right-*.png'))]
+
         self.left_counter = 0
         self.right_counter = 0
         
