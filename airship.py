@@ -50,6 +50,13 @@ class AirshipGondola(pygame.sprite.Sprite):
 
         self.body.angular_velocity = self.body.angular_velocity * .99
         self.body.angle *= .99
+
+        if self.balloon:
+            pygame.draw.aaline(framework.screen,pygame.color.THECOLORS["brown"],self.body.position - pymunk.Vec2d(105,0).rotated(self.body.angle) - framework.scrolling, self.balloon.body.position - pymunk.Vec2d(185,20).rotated(self.balloon.body.angle) - framework.scrolling)
+            pygame.draw.line(framework.screen,pygame.color.THECOLORS["gray"],self.body.position - pymunk.Vec2d(102,0).rotated(self.body.angle) - framework.scrolling, self.balloon.body.position - pymunk.Vec2d(185,20).rotated(self.balloon.body.angle) - framework.scrolling)
+            pygame.draw.line(framework.screen,pygame.color.THECOLORS["brown"],self.body.position + pymunk.Vec2d(115,0).rotated(self.body.angle) - framework.scrolling, self.balloon.body.position + pymunk.Vec2d(185,20).rotated(self.balloon.body.angle) - framework.scrolling)
+            pygame.draw.line(framework.screen,pygame.color.THECOLORS["gray"],self.body.position + pymunk.Vec2d(112,0).rotated(self.body.angle) - framework.scrolling, self.balloon.body.position + pymunk.Vec2d(185,20).rotated(self.balloon.body.angle) - framework.scrolling)
+
         if framework.debug:
             for shape in self.shapes:
                 scrolled_points = [point - framework.scrolling for point in shape.get_vertices()]
@@ -61,13 +68,9 @@ class AirshipGondola(pygame.sprite.Sprite):
         self.body.apply_impulse((150,0),(0,80))
     def down(self):
         if self.balloon:
-    #        self.balloon.buoyancy += pymunk.Vec2d(0,10)
-    #        self.balloon.body.apply_force((0,10),(0,0))
             self.balloon.body.apply_impulse((0,500),(0,0))
     def up(self):
         if self.balloon:
-    #        self.balloon.buoyancy += pymunk.Vec2d(0,-10)
-    #        self.balloon.body.apply_force((0,-10),(0,0))
             self.balloon.body.apply_impulse((0,-500),(0,0))
 
 class AirshipBalloon(pygame.sprite.Sprite):
@@ -113,13 +116,9 @@ class Airship():
         balloon = AirshipBalloon(x,y,buoyancy=buoyancy)
         gondola = AirshipGondola(x,y+80)
         self.balloon = gondola.balloon = balloon
-        self.rope1 = pymunk.constraint.SlideJoint(balloon.body,gondola.body,(-300,0),(-150,0),0,250)
-        self.rope2 = pymunk.constraint.SlideJoint(balloon.body,gondola.body,(300,0),(150,0),0,250)
+        self.rope1 = pymunk.constraint.SlideJoint(balloon.body,gondola.body,(-185,0),(-105,0),0,240)
+        self.rope2 = pymunk.constraint.SlideJoint(balloon.body,gondola.body,(185,0),(105,0),0,240)
 
-        framework.space.add(gondola.body)
-        for shape in gondola.shapes:
-            framework.space.add(shape)
-        gondola.add(framework.characters)
 
         framework.space.add(balloon.body)
         framework.space.add(balloon.shape)
@@ -127,3 +126,7 @@ class Airship():
         framework.space.add(self.rope1)
         framework.space.add(self.rope2)
 
+        framework.space.add(gondola.body)
+        for shape in gondola.shapes:
+            framework.space.add(shape)
+        gondola.add(framework.characters)
