@@ -22,6 +22,8 @@ def to_pygame(p):
 def init():
     framework.init()
     currentlevel.level()   
+    framework.screen.fill(framework.bgcolor())
+    pygame.display.flip()
 
 def main():
     while True:
@@ -45,10 +47,6 @@ def main():
             framework.scrolling.y += (currentlevel.player.rect.center[1] - framework.viewport_height + framework.scrolling_margin) * .1
 
 
-        #framework.screen.fill(THECOLORS["lightblue"])
-        colormod = 165- int(abs((currentlevel.player.body.position.y - 700) / 40)) % 165
-        #framework.screen.fill(pygame.Color(115,165,250))
-        framework.screen.fill(pygame.Color(115,colormod,250))
         framework.characters.update()
         
         for primitive in framework.primitives:
@@ -63,8 +61,9 @@ def main():
             if currentlevel.airship1:
                 framework.screen.blit(framework.font.render("buoyancy: " + str((currentlevel.airship1.balloon.buoyancy[1])), 1, THECOLORS["green"]), (0,40))
 
-        pygame.display.flip()
+        pygame.display.update(framework.dirty_rects)
         framework.clock.tick(70)
+        framework.dirty_rects = []
 
 if __name__ == '__main__':
     init()

@@ -3,6 +3,7 @@ from pygame.color import *
 import pygame.gfxdraw
 import pymunk
 import math
+import copy
 
 import framework
 import level1
@@ -30,16 +31,22 @@ class StaticBrick():
         self.shape.friction = 0.5
         self.shape.collision_type = 1
         self.shape.owner = self
+
+        self.old_rect = None
         
     def update(self):
-        global visibility
-        if self.body.position.get_distance(level1.player.body.position) < visibility:
+#        global visibility
+#        if self.body.position.get_distance(level1.player.body.position) < visibility:
             scrolled_points = [point - framework.scrolling for point in self.shape.get_vertices()]
 
             topleft = self.body.position - framework.scrolling - pymunk.Vec2d(self.width/2,self.height/2)
             rect = pygame.Rect(topleft[0],topleft[1],self.width,self.height)
-            framework.screen.fill(THECOLORS["darkgrey"],rect)
-            pygame.gfxdraw.rectangle(framework.screen, rect, THECOLORS["black"])
+            if rect != self.old_rect:
+                framework.screen.fill(framework.bgcolor(),self.old_rect)
+                framework.screen.fill(THECOLORS["darkgrey"],rect)
+                pygame.gfxdraw.rectangle(framework.screen, rect, THECOLORS["black"])
+                framework.dirty_rects.extend([copy.copy(self.old_rect), rect])
+                self.old_rect = copy.copy(rect)
 
 
 class Brick():

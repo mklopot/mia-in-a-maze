@@ -69,6 +69,16 @@ def init():
     global grabbables
     grabbables = []
 
+    global dirty_rects
+    dirty_rects = []
+
+def bgcolor(position=None):
+    if position:
+        colormod = 165 - int(abs((position.y - 700) / 40)) % 165
+        return pygame.Color(115,colormod,250)
+    else:
+        return pygame.Color(115,165,250)
+
 def rot_center(image, angle):
     """rotate an image while keeping its center and size"""
     orig_rect = image.get_rect()
