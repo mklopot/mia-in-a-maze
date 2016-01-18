@@ -35,6 +35,7 @@ def level():
     playable = [player, player2]
 
     npcs = [doomimp.DoomImp(x=200, y=250, target=player), doomimp.DoomImp(x=600, y=150, target=player), doomimp.DoomImp(x=550,y=560,target=player)]
+#    npcs = []
     for npc in npcs:
         framework.space.add(npc.body)
         for shape in npc.shapes:
@@ -68,7 +69,7 @@ def level():
 
     maze.make_maze(540, 80, width=8, height=4, cellwidth=70, cellheight=65, wallthickness=10)
 
-    maze.make_maze(840, 80, width=80, height=12, cellwidth=90, cellheight=65, wallthickness=20)
+    maze.make_maze(840, 80, width=80, height=12, cellwidth=100, cellheight=75, wallthickness=20)
     
     
     framework.grabbables.append((brick.Balloon(radius=15, num_pts=6, x=300, y=500)))

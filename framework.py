@@ -7,21 +7,23 @@ from pygame.color import *
 import pymunk
 import math
 
-debug = False
-#debug = True
+#debug = False
+debug = True
 
 def init():
     global viewport_width
-    #viewport_width = 800
-    viewport_width =1024 
+    viewport_width = 1920
+#    viewport_width =1024 
     global viewport_height
-    #viewport_height = 600
-    viewport_height = 768
+    viewport_height = 1080
+#    viewport_height = 768
 
     pygame.mixer.init()
     pygame.init()
     global screen
-    screen = pygame.display.set_mode((viewport_width, viewport_height))
+#    screen = pygame.display.set_mode((viewport_width, viewport_height))
+#    screen = pygame.display.set_mode((viewport_width, viewport_height),pygame.FULLSCREEN | pygame.HWSURFACE)
+    screen = pygame.display.set_mode((viewport_width, viewport_height),pygame.FULLSCREEN)
     pygame.display.set_caption("Mia in a Maze")
     pygame.key.set_repeat(10)
     
@@ -44,7 +46,7 @@ def init():
     global scrolling
     scrolling = pymunk.Vec2d(0,0)
     global scrolling_margin
-    scrolling_margin = 300
+    scrolling_margin = 500
     
     global characters
     characters = pygame.sprite.Group()

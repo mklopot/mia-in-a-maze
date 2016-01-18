@@ -1,5 +1,6 @@
 import pygame
 from pygame.color import *
+import pygame.gfxdraw
 import pymunk
 import math
 
@@ -7,7 +8,7 @@ import framework
 import level1
 
 global visibility
-visibility = 650
+visibility = 850
 
 class StaticBrick():
 
@@ -16,10 +17,13 @@ class StaticBrick():
         self.body = pymunk.Body(None,None)
         
         points = [(-width/2, -height/2), (-width/2, height/2), (width/2,height/2), (width/2, -height/2)]        
+
+        self.width = width
+        self.height = height
                 
         self.shape = pymunk.Poly(self.body, points, (0,0))
 
-        self.body.position = x,y
+        self.body.position = pymunk.Vec2d(x,y)
         
         self.shapes = [self.shape]
               
@@ -30,9 +34,12 @@ class StaticBrick():
     def update(self):
         global visibility
         if self.body.position.get_distance(level1.player.body.position) < visibility:
-          scrolled_points = [point - framework.scrolling for point in self.shape.get_vertices()]
-          pygame.draw.polygon(framework.screen, THECOLORS["darkgrey"], scrolled_points)       
-          pygame.draw.polygon(framework.screen, THECOLORS["black"], scrolled_points, True)
+            scrolled_points = [point - framework.scrolling for point in self.shape.get_vertices()]
+
+            topleft = self.body.position - framework.scrolling - pymunk.Vec2d(self.width/2,self.height/2)
+            rect = pygame.Rect(topleft[0],topleft[1],self.width,self.height)
+            framework.screen.fill(THECOLORS["darkgrey"],rect)
+            pygame.gfxdraw.rectangle(framework.screen, rect, THECOLORS["black"])
 
 
 class Brick():
