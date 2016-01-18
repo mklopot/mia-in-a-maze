@@ -47,12 +47,13 @@ def main():
             framework.scrolling.y += (currentlevel.player.rect.center[1] - framework.viewport_height + framework.scrolling_margin) * .1
 
 
+        framework.characters.clear(framework.screen,clear_callback)
         framework.characters.update()
         
         for primitive in framework.primitives:
             primitive.update()
             
-        framework.characters.draw(framework.screen)
+        characters_dirtyrects = framework.characters.draw(framework.screen)
         
         framework.space.step(1/50.0)
         if framework.debug:
@@ -61,9 +62,16 @@ def main():
             if currentlevel.airship1:
                 framework.screen.blit(framework.font.render("buoyancy: " + str((currentlevel.airship1.balloon.buoyancy[1])), 1, THECOLORS["green"]), (0,40))
 
+        framework.dirty_rects.extend(characters_dirtyrects)
         pygame.display.update(framework.dirty_rects)
+       # pygame.display.update(characters_dirtyrects)
         framework.clock.tick(70)
         framework.dirty_rects = []
+
+
+def clear_callback(surf, rect):
+    color = framework.bgcolor()
+    surf.fill(color, rect)
 
 if __name__ == '__main__':
     init()

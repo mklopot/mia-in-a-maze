@@ -42,20 +42,20 @@ def level():
             framework.space.add(shape)
         npc.add(framework.characters)
             
-    bricks = []
-    for i in range(1,8):
-        bricks.append(brick.Brick(size=40, x=85*i, y=-400))
-    for i in range(1,20):
-        bricks.append(brick.Brick(size=10, y=150, x=100+21*i))
-    for i in range(1,20):
-        bricks.append(brick.Brick(size=10, y=250, x=100+21*i))
-    for i in range(1,20):
-        bricks.append(brick.Brick(size=10, y=350, x=100+21*i))
-    
-    for brickinstance in bricks:    
-        framework.primitives.append(brickinstance)
-        framework.space.add(brickinstance.body)
-        framework.space.add(brickinstance.shape)    
+#    bricks = []
+#    for i in range(1,8):
+#        bricks.append(brick.Brick(size=40, x=85*i, y=-400))
+#    for i in range(1,20):
+#        bricks.append(brick.Brick(size=10, y=150, x=100+21*i))
+#    for i in range(1,20):
+#        bricks.append(brick.Brick(size=10, y=250, x=100+21*i))
+#    for i in range(1,20):
+#        bricks.append(brick.Brick(size=10, y=350, x=100+21*i))
+#    
+#    for brickinstance in bricks:    
+#        framework.primitives.append(brickinstance)
+#        framework.space.add(brickinstance.body)
+#        framework.space.add(brickinstance.shape)    
     
     staticbricks = []
     staticbricks.append(brick.StaticBrick(x=425, y=50, width=50, height=10))
@@ -72,21 +72,21 @@ def level():
     maze.make_maze(840, 80, width=80, height=12, cellwidth=100, cellheight=75, wallthickness=20)
     
     
-    framework.grabbables.append((brick.Balloon(radius=15, num_pts=6, x=300, y=500)))
-    framework.grabbables[0].shape.layers = 0b1000
-    framework.grabbables[0].shape.group = 2
+#    framework.grabbables.append((brick.Balloon(radius=15, num_pts=6, x=300, y=500)))
+#    framework.grabbables[0].shape.layers = 0b1000
+#    framework.grabbables[0].shape.group = 2
 
-    framework.primitives.append(framework.grabbables[0])
-    framework.space.add(framework.grabbables[0].body)
-    framework.space.add(framework.grabbables[0].shape)
+#    framework.primitives.append(framework.grabbables[0])
+#    framework.space.add(framework.grabbables[0].body)
+#    framework.space.add(framework.grabbables[0].shape)
 
-    framework.grabbables.append((brick.Balloon(radius=15, num_pts=10, x=115, y=525)))
-    framework.grabbables[1].shape.layers = 0b1000
-    framework.grabbables[1].shape.group = 2
+#    framework.grabbables.append((brick.Balloon(radius=15, num_pts=10, x=115, y=525)))
+#    framework.grabbables[1].shape.layers = 0b1000
+#    framework.grabbables[1].shape.group = 2
 
-    framework.primitives.append(framework.grabbables[1])
-    framework.space.add(framework.grabbables[1].body)
-    framework.space.add(framework.grabbables[1].shape)
+#    framework.primitives.append(framework.grabbables[1])
+#    framework.space.add(framework.grabbables[1].body)
+#    framework.space.add(framework.grabbables[1].shape)
 
     candies = []
     for i in range(100):

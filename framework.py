@@ -49,7 +49,8 @@ def init():
     scrolling_margin = 500
     
     global characters
-    characters = pygame.sprite.Group()
+#    characters = pygame.sprite.Group()
+    characters = pygame.sprite.RenderUpdates()
 
     global footcontact_handler
     def footcontact_handler(space,arbiter):
