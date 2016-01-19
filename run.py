@@ -51,12 +51,14 @@ def main():
         framework.screen.fill(pygame.Color(115,colormod,250))
         framework.characters.update()
         
+
+        framework.screen.blit(framework.static_surface,(-framework.scrolling.x,-framework.scrolling.y))
         for primitive in framework.primitives:
             primitive.update()
             
         framework.characters.draw(framework.screen)
         
-        framework.space.step(1/50.0)
+        framework.space.step(1/70.0)
         if framework.debug:
             framework.screen.blit(framework.font.render("fps: " + str(framework.clock.get_fps()), 1, THECOLORS["green"]), (0,0))
             framework.screen.blit(framework.font.render("shapes: " + str(len(framework.space.shapes)), 1, THECOLORS["green"]), (0,20))

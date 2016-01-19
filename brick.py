@@ -31,15 +31,17 @@ class StaticBrick():
         self.shape.collision_type = 1
         self.shape.owner = self
         
-    def update(self):
-        global visibility
-        if self.body.position.get_distance(level1.player.body.position) < visibility:
-            scrolled_points = [point - framework.scrolling for point in self.shape.get_vertices()]
+        topleft = self.body.position - framework.scrolling - pymunk.Vec2d(self.width/2,self.height/2)
+        rect = pygame.Rect(topleft[0],topleft[1],self.width,self.height)
+        framework.static_surface.fill(THECOLORS["darkgrey"],rect)
+        pygame.gfxdraw.rectangle(framework.static_surface, rect, THECOLORS["orange"])
 
-            topleft = self.body.position - framework.scrolling - pymunk.Vec2d(self.width/2,self.height/2)
-            rect = pygame.Rect(topleft[0],topleft[1],self.width,self.height)
-            framework.screen.fill(THECOLORS["darkgrey"],rect)
-            pygame.gfxdraw.rectangle(framework.screen, rect, THECOLORS["black"])
+    def update(self):
+#        global visibility
+#        if self.body.position.get_distance(level1.player.body.position) < visibility:
+#            scrolled_points = [point - framework.scrolling for point in self.shape.get_vertices()]
+        pass
+
 
 
 class Brick():
@@ -114,5 +116,5 @@ class Balloon(Polygon):
             pygame.draw.polygon(framework.screen, THECOLORS["red"], scrolled_points)
             pygame.draw.polygon(framework.screen, THECOLORS["black"], scrolled_points, True)
 
-        self.body.apply_impulse((0,-200))
+        self.body.apply_impulse((0,-100))
 

@@ -48,7 +48,7 @@ class AirshipGondola(pygame.sprite.Sprite):
         self.rect.center = self.body.position - framework.scrolling
         self.image = framework.rot_center(self.image_default, math.degrees(-self.body.angle))
 
-        self.body.angular_velocity = self.body.angular_velocity * .99
+        self.body.angular_velocity = self.body.angular_velocity * .98
         self.body.angle *= .99
 
         if self.balloon:
@@ -63,9 +63,9 @@ class AirshipGondola(pygame.sprite.Sprite):
                 pygame.draw.polygon(framework.screen, pygame.color.THECOLORS["green"], scrolled_points, True)
     
     def left(self):
-        self.body.apply_impulse((-150,0),(0,80))
+        self.body.apply_impulse((-150,0),(0,20))
     def right(self):
-        self.body.apply_impulse((150,0),(0,80))
+        self.body.apply_impulse((150,0),(0,20))
     def down(self):
         if self.balloon:
             self.balloon.body.apply_impulse((0,500),(0,0))

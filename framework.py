@@ -70,6 +70,11 @@ def init():
     global grabbables
     grabbables = []
 
+    global static_surface
+    static_surface = pygame.Surface((2500, 7000))
+    static_surface.set_colorkey(0)
+    
+
 def rot_center(image, angle):
     """rotate an image while keeping its center and size"""
     orig_rect = image.get_rect()
