@@ -116,5 +116,5 @@ class Balloon(Polygon):
             pygame.draw.polygon(framework.screen, THECOLORS["red"], scrolled_points)
             pygame.draw.polygon(framework.screen, THECOLORS["black"], scrolled_points, True)
 
-        self.body.apply_impulse((0,-100))
+        self.body.apply_impulse((0,-110))
 
