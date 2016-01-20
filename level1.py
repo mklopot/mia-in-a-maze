@@ -18,7 +18,6 @@ import airship
 
 def level():
     global player
-#    player = mia.Mia(x=300,y=450)
     player = mia.Mia(x=330,y=0)
     framework.space.add(player.body)
     for shape in player.shapes:
@@ -44,7 +43,7 @@ def level():
             
     bricks = []
     for i in range(1,8):
-        bricks.append(brick.Brick(size=40, x=95*i, y=-400))
+        bricks.append(brick.Brick(size=40, x=300 + 125*i, y=-400))
     for i in range(1,20):
         bricks.append(brick.Brick(size=10, y=150, x=130+21*i))
     for i in range(1,20):

@@ -11,7 +11,8 @@ def myround(x, base=5):
 class Basic_Sprite(pygame.sprite.Sprite):
     def __init__(self,image,x,y,angle=0,angular_velocity=0,width=10,height=10,mass=1,elasticity=0,friction=.8,offset=(0,0),jumpable=0):
         pygame.sprite.Sprite.__init__(self)
-        self.image_default = pygame.image.load(image).convert_alpha()
+        self.image_default = pygame.image.load(image).convert()
+        self.image_default.set_colorkey((1,0,0))
         self.image = self.image_default
         
         self.rect = self.image.get_rect()

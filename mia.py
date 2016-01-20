@@ -9,7 +9,8 @@ class Mia(pygame.sprite.Sprite):
 
     def __init__(self, image="images/mia/mia-front-0.png", x=100, y=100):
         pygame.sprite.Sprite.__init__(self)
-        self.image_default = pygame.image.load(image).convert_alpha()
+        self.image_default = pygame.image.load(image).convert()
+        self.image_default.set_colorkey((1,0,0))
         self.image = self.image_default
         
         self.rect = self.image.get_rect()
@@ -34,8 +35,15 @@ class Mia(pygame.sprite.Sprite):
         
         self.footcontact = False
         
-        self.imagelist_left = [pygame.image.load(imagefile).convert_alpha() for imagefile in  sorted(glob.glob('images/mia/mia-left-*.png'))]
-        self.imagelist_right = [pygame.image.load(imagefile).convert_alpha() for imagefile in  sorted(glob.glob('images/mia/mia-right-*.png'))]
+        self.imagelist_left = [pygame.image.load(imagefile).convert() for imagefile in  sorted(glob.glob('images/mia/mia-left-*.png'))]
+        for i in self.imagelist_left:
+             i.set_colorkey((1,0,0))
+
+        print self.imagelist_left
+        self.imagelist_right = [pygame.image.load(imagefile).convert() for imagefile in  sorted(glob.glob('images/mia/mia-right-*.png'))]
+        for i in self.imagelist_right:
+             i.set_colorkey((1,0,0))
+
         self.left_counter = 0
         self.right_counter = 0
         

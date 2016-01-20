@@ -8,7 +8,8 @@ import framework
 class AirshipGondola(pygame.sprite.Sprite):
     def __init__(self,x=600,y=5,angle=0,angular_velocity=0):
         pygame.sprite.Sprite.__init__(self)
-        self.image_default = pygame.image.load("images/airship-gondola.png").convert_alpha()
+        self.image_default = pygame.image.load("images/airship-gondola.png").convert()
+        self.image_default.set_colorkey((1,0,0))
         self.image = self.image_default
         
         self.rect = self.image.get_rect()
@@ -76,7 +77,8 @@ class AirshipGondola(pygame.sprite.Sprite):
 class AirshipBalloon(pygame.sprite.Sprite):
     def __init__(self,x=600,y=-20,angle=0,angular_velocity=0,buoyancy=pymunk.Vec2d(0,-8000)):
         pygame.sprite.Sprite.__init__(self)
-        self.image_default = pygame.image.load("images/airship-balloon.png").convert_alpha()
+        self.image_default = pygame.image.load("images/airship-balloon.png").convert()
+        self.image_default.set_colorkey((1,0,0))
         self.image = self.image_default
         
         self.rect = self.image.get_rect()
