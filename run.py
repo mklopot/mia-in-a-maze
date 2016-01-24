@@ -48,7 +48,10 @@ def main():
         #framework.screen.fill(THECOLORS["lightblue"])
         colormod = 165- int(abs((currentlevel.player.body.position.y - 700) / 40)) % 165
         #framework.screen.fill(pygame.Color(115,165,250))
-        framework.screen.fill(pygame.Color(115,colormod,250))
+#        framework.screen.fill(pygame.Color(115,colormod,250))
+        
+        framework.screen.blit(currentlevel.background,(-1500-framework.scrolling.x*.5,-3500-framework.scrolling.y*.5))
+
         framework.characters.update()
         
 

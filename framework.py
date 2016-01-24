@@ -24,6 +24,7 @@ def init():
 #    screen = pygame.display.set_mode((viewport_width, viewport_height))
 #    screen = pygame.display.set_mode((viewport_width, viewport_height),pygame.FULLSCREEN | pygame.HWSURFACE)
     screen = pygame.display.set_mode((viewport_width, viewport_height),pygame.FULLSCREEN | pygame.DOUBLEBUF)
+#    screen = pygame.display.set_mode((viewport_width, viewport_height),pygame.FULLSCREEN | pygame.DOUBLEBUF | pygame.HWSURFACE)
 #    screen = pygame.display.set_mode((viewport_width, viewport_height),pygame.FULLSCREEN)
     pygame.display.set_caption("Mia in a Maze")
     pygame.key.set_repeat(10)
@@ -47,7 +48,7 @@ def init():
     global scrolling
     scrolling = pymunk.Vec2d(0,0)
     global scrolling_margin
-    scrolling_margin = 500
+    scrolling_margin = 900
     
     global characters
     characters = pygame.sprite.Group()

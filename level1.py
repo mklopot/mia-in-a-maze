@@ -103,6 +103,9 @@ def level():
 
     global airship1
     airship1 = airship.Airship()
+
+    global background
+    background = pygame.image.load("images/clouds.png").convert()
     
 
     pygame.mixer.music.load("I-Want-Candy.wav")
