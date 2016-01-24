@@ -71,7 +71,7 @@ def init():
     grabbables = []
 
     global static_surface
-    static_surface = pygame.Surface((2500, 7000))
+    static_surface = pygame.Surface((3000, 7000))
     static_surface.set_colorkey(0)
     
 

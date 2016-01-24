@@ -48,14 +48,3 @@ class Basic_Sprite(pygame.sprite.Sprite):
             scrolled_points = [point - framework.scrolling for point in self.shape.get_vertices()]
             pygame.draw.polygon(framework.screen, pygame.color.THECOLORS["green"], scrolled_points, True)
 
-
-
-        
-        
-    
-                
-            
-
-
-
-

@@ -114,12 +114,15 @@ class AirshipBalloon(pygame.sprite.Sprite):
 
 
 class Airship():
-    def __init__(self,x=600, y=-20, buoyancy = pymunk.Vec2d(0,-34000)):
+    def __init__(self,x=600, y=100, buoyancy = pymunk.Vec2d(0,-34000)):
         balloon = AirshipBalloon(x,y,buoyancy=buoyancy)
         gondola = AirshipGondola(x,y+80)
         self.balloon = gondola.balloon = balloon
         self.rope1 = pymunk.constraint.SlideJoint(balloon.body,gondola.body,(-185,0),(-105,0),0,240)
         self.rope2 = pymunk.constraint.SlideJoint(balloon.body,gondola.body,(185,0),(105,0),0,240)
+
+        self.rope1.max_force = 50000
+	self.rope2.max_force = 50000
 
 
         framework.space.add(balloon.body)

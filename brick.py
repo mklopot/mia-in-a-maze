@@ -12,7 +12,7 @@ visibility = 850
 
 class StaticBrick():
 
-    def __init__(self, width, height, x=300, y=400):
+    def __init__(self, width, height, x=300, y=400, invisible=False):
            
         self.body = pymunk.Body(None,None)
         
@@ -30,11 +30,12 @@ class StaticBrick():
         self.shape.friction = 0.5
         self.shape.collision_type = 1
         self.shape.owner = self
-        
-        topleft = self.body.position - framework.scrolling - pymunk.Vec2d(self.width/2,self.height/2)
-        rect = pygame.Rect(topleft[0],topleft[1],self.width,self.height)
-        framework.static_surface.fill(THECOLORS["darkgrey"],rect)
-        pygame.gfxdraw.rectangle(framework.static_surface, rect, THECOLORS["orange"])
+
+        if not invisible:        
+            topleft = self.body.position - framework.scrolling - pymunk.Vec2d(self.width/2,self.height/2)
+            rect = pygame.Rect(topleft[0],topleft[1],self.width,self.height)
+            framework.static_surface.fill(THECOLORS["darkgrey"],rect)
+            pygame.gfxdraw.rectangle(framework.static_surface, rect, THECOLORS["orange"])
 
     def update(self):
 #        global visibility

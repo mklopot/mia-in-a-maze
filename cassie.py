@@ -53,18 +53,18 @@ class Cassie(pygame.sprite.Sprite):
  
         self.vehicle = None
         
+    def respawn(self):
+        self.body.position = framework.currentlevel.respawn_point(self)
+        self.body.velocity = framework.currentlevel.respawn_velocity(self)
+        for joint in self.grab_joints:
+            framework.space.remove(joint)
+        self.grab_joints = []
+
     def update(self):
         if framework.debug:
             for shape in self.shapes:
                 scrolled_points = [point - framework.scrolling for point in shape.get_vertices()]
                 pygame.draw.polygon(framework.screen, pygame.color.THECOLORS["green"], scrolled_points, True)
-        if self.body.position.y > 6000:
-            self.body.position.y = -300
-            self.body.velocity = (0,0)
-        if self.body.position.x > 4000 or self.body.position.x < -1000:
-            self.body.position.x = 50
-            self.body.position.y = -300
-            self.body.velocity = (0,0)
 
         self.rect.center = self.body.position - framework.scrolling
         
