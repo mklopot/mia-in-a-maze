@@ -65,7 +65,7 @@ def level():
         framework.space.add(staticbrick.shape)
 
     boundary = []    
-    boundary.append(brick.StaticBrick(x=1500, y=7000, width=3000, height=10))
+    boundary.append(brick.StaticBrick(x=1500, y=6200, width=3000, height=10))
     boundary.append(brick.StaticBrick(x=1500, y=10, width=3000, height=100,invisible=True))
     for bound in boundary:
         framework.space.add(bound.shape)
@@ -109,6 +109,10 @@ def level():
 
     global airship1
     airship1 = airship.Airship(x=500,y=850)
+
+    global background
+    background = pygame.image.load("images/clouds.png").convert()
+    #background = pygame.image.load("images/grid.png").convert()
     
 
     pygame.mixer.music.load("I-Want-Candy.wav")

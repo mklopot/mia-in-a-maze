@@ -48,9 +48,9 @@ def main():
 
 
         #framework.screen.fill(THECOLORS["lightblue"])
-        colormod = 165- int(abs((currentlevel.player.body.position.y - 700) / 40)) % 165
-        #framework.screen.fill(pygame.Color(115,165,250))
-        framework.screen.fill(pygame.Color(115,colormod,250))
+#        colormod = 165- int(abs((currentlevel.player.body.position.y - 700) / 40)) % 165
+        framework.screen.fill(pygame.Color(115,165,250))
+#        framework.screen.fill(pygame.Color(115,colormod,250))
 
         ## Wrap Around
         max_x, max_y = levelsize
@@ -75,6 +75,10 @@ def main():
             primitive.body.position.x = primitive.body.position.x % max_x
             primitive.body.position.y = primitive.body.position.y % max_y
 
+        ## Wraparound Parallax Background 
+        framework.screen.blit(currentlevel.background,( framework.scrolling_margin*.5-framework.scrolling.x*.5, -framework.scrolling_margin*.5-framework.scrolling.y*.5))
+        framework.screen.blit(currentlevel.background,( framework.scrolling_margin*.5-framework.scrolling.x*.5-max_x*.5, -framework.scrolling_margin*.5-framework.scrolling.y*.5))
+        framework.screen.blit(currentlevel.background,( framework.scrolling_margin*.5-framework.scrolling.x*.5+max_x*.5, -framework.scrolling_margin*.5-framework.scrolling.y*.5))
 
         framework.characters.update()
         
@@ -87,13 +91,17 @@ def main():
             
         framework.characters.draw(framework.screen)
        
-        framework.clock.tick(70) 
+        #framework.clock.tick(70) 
+        framework.clock.tick() 
         framework.space.step(1/70.0)
         if framework.debug:
             framework.screen.blit(framework.font.render("fps: " + str(framework.clock.get_fps()), 1, THECOLORS["green"]), (0,0))
             framework.screen.blit(framework.font.render("shapes: " + str(len(framework.space.shapes)), 1, THECOLORS["green"]), (0,20))
-            if currentlevel.airship1:
-                framework.screen.blit(framework.font.render("buoyancy: " + str((currentlevel.airship1.balloon.buoyancy[1])), 1, THECOLORS["green"]), (0,40))
+            if currentlevel.player:
+                framework.screen.blit(framework.font.render("player X: " + str((currentlevel.player.body.position.x)), 1, THECOLORS["green"]), (1500,0))
+                framework.screen.blit(framework.font.render("scrolling X:: " + str((framework.scrolling[0])), 1, THECOLORS["green"]), (1500,20))
+                pygame.draw.line(framework.screen,THECOLORS['green'],(framework.scrolling_margin,0),(framework.scrolling_margin,framework.viewport_height))
+                pygame.draw.line(framework.screen,THECOLORS['green'],(framework.viewport_width-framework.scrolling_margin,0),(framework.viewport_width-framework.scrolling_margin,framework.viewport_height))
 
         pygame.display.flip()
 

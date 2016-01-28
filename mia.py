@@ -51,6 +51,8 @@ class Mia(pygame.sprite.Sprite):
         self.animation_counter = self.animation_counter_max
 
         self.grab_joints = []
+         
+        self.vehicle = None
         
         self.jumpsound = pygame.mixer.Sound("jump.wav")
 
