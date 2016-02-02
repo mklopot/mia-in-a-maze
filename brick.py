@@ -34,8 +34,8 @@ class StaticBrick():
         if not invisible:        
             topleft = self.body.position - framework.scrolling - pymunk.Vec2d(self.width/2,self.height/2)
             rect = pygame.Rect(topleft[0],topleft[1],self.width,self.height)
-            framework.static_surface.fill(THECOLORS["darkgrey"],rect)
-            pygame.gfxdraw.rectangle(framework.static_surface, rect, THECOLORS["orange"])
+            framework.static_surface.fill(THECOLORS["orange"],rect)
+            #pygame.gfxdraw.rectangle(framework.static_surface, rect, THECOLORS["orange"])
 
     def update(self):
 #        global visibility

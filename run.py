@@ -99,7 +99,8 @@ def main():
             framework.screen.blit(framework.font.render("shapes: " + str(len(framework.space.shapes)), 1, THECOLORS["green"]), (0,20))
             if currentlevel.player:
                 framework.screen.blit(framework.font.render("player X: " + str((currentlevel.player.body.position.x)), 1, THECOLORS["green"]), (1500,0))
-                framework.screen.blit(framework.font.render("scrolling X:: " + str((framework.scrolling[0])), 1, THECOLORS["green"]), (1500,20))
+                framework.screen.blit(framework.font.render("scrolling X: " + str((framework.scrolling[0])), 1, THECOLORS["green"]), (1500,20))
+                framework.screen.blit(framework.font.render("Force on player: " + str(int(currentlevel.player.body.kinetic_energy)), 1, THECOLORS["green"]), (1500,40))
                 pygame.draw.line(framework.screen,THECOLORS['green'],(framework.scrolling_margin,0),(framework.scrolling_margin,framework.viewport_height))
                 pygame.draw.line(framework.screen,THECOLORS['green'],(framework.viewport_width-framework.scrolling_margin,0),(framework.viewport_width-framework.scrolling_margin,framework.viewport_height))
 

@@ -109,7 +109,7 @@ class Mia(pygame.sprite.Sprite):
         if framework.grabbables:
              for item in filter(self.in_reach,framework.grabbables):
                  if len(self.grab_joints) < 3:
-                     self.grab_joints.append(pymunk.SlideJoint(self.body, item.body, (0,0), (0,0), min=5, max=14))
+                     self.grab_joints.append(pymunk.SlideJoint(self.body, item.body, (0,0), (0,0), min=0, max=14))
                      framework.space.add(self.grab_joints[-1])
 
     def drop(self):

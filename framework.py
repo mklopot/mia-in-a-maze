@@ -8,7 +8,7 @@ import pymunk
 import math
 
 debug = False
-#debug = True
+debug = True
 
 def init():
     global viewport_width
